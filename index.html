@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אסטרל · מצגת ביצועי סושיאל 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200;300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1622; --navy-2:#0E1E2E; --navy-3:#0A1420;
+  --card:#13273A; --card-line:#22405A;
+  --gold:#C9A86A; --gold-soft:#DEC48A; --gold-deep:#A6864F;
+  --teal:#4FA5B8; --teal-soft:#7Fc4d3;
+  --cream:#EDE4D3; --sand:#F2ECDF; --ink:#12202E;
+  --muted:#9DB0C0; --muted-2:#7C90A2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Assistant',Arial,sans-serif;color:var(--cream);background:var(--navy);overflow-x:hidden}
+h1,h2,h3,h4,.num{font-family:'Heebo',Arial,sans-serif}
+
+.deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory}
+.deck::-webkit-scrollbar{width:0}
+section.slide{
+  min-height:100vh;scroll-snap-align:start;scroll-snap-stop:always;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(40px,6vw,92px);position:relative;
+}
+/* backgrounds / rhythm */
+.slide.dark{background:
+  radial-gradient(120% 80% at 88% -8%, rgba(201,168,106,.15), transparent 52%),
+  radial-gradient(110% 90% at 4% 112%, rgba(79,165,184,.13), transparent 52%),
+  linear-gradient(160deg,#0B1622 0%, #0E1E2E 60%, #0B1826 100%);
+  color:var(--cream);}
+.slide.sand{background:var(--sand);color:var(--ink)}
+
+/* progress + dots */
+#bar{position:fixed;top:0;right:0;height:3px;width:0;z-index:100;
+  background:linear-gradient(90deg,var(--gold),var(--teal));box-shadow:0 0 10px rgba(201,168,106,.5);transition:width .15s linear}
+#dots{position:fixed;left:20px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:11px}
+#dots button{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(237,228,211,.45);background:transparent;cursor:pointer;padding:0;transition:.25s}
+#dots button.on{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(201,168,106,.7);transform:scale(1.4)}
+#dots button.dk{border-color:rgba(18,32,46,.4)}
+
+/* logo + eyebrow */
+.brand{position:absolute;top:clamp(30px,4vw,52px);left:clamp(40px,6vw,92px);height:46px}
+.slide.sand .brand{filter:invert(1)}
+.eyebrow{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;color:var(--gold);
+  display:flex;align-items:center;gap:11px;margin-bottom:20px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--gold)}
+.slide.sand .eyebrow{color:var(--gold-deep)}
+
+.wrap{max-width:1180px;margin:0 auto;width:100%}
+.shead h2{font-weight:800;font-size:clamp(30px,4vw,50px);line-height:1.07;letter-spacing:-.01em;color:#fff}
+.slide.sand .shead h2{color:var(--ink)}
+.shead p{color:var(--muted);font-size:clamp(15px,1.4vw,19px);margin-top:14px;max-width:640px;line-height:1.5}
+.slide.sand .shead p{color:#556}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.13s}.d3{transition-delay:.20s}
+.d4{transition-delay:.27s}.d5{transition-delay:.34s}.d6{transition-delay:.41s}
+.d7{transition-delay:.48s}.d8{transition-delay:.55s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ===== HERO ===== */
+#hero{justify-content:center;overflow:hidden}
+#hero .glowline{position:absolute;left:-5%;right:-5%;top:50%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,106,.55),transparent);opacity:.0;animation:hz 2.4s .3s ease forwards}
+@keyframes hz{to{opacity:1}}
+.hero-inner{position:relative;z-index:2;max-width:1050px}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--card-line);
+  color:var(--gold);font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;
+  padding:8px 16px;border-radius:100px;margin-bottom:30px;background:rgba(201,168,106,.06)}
+.hero-badge .sp{color:var(--gold);font-size:12px}
+#hero h1{font-weight:800;font-size:clamp(40px,6.4vw,80px);line-height:1.03;letter-spacing:-.015em;color:#fff}
+#hero h1 .g{color:var(--gold);font-weight:200;display:block;font-size:.62em;margin-top:12px;letter-spacing:0}
+#hero .sub{font-size:clamp(16px,1.7vw,21px);color:var(--muted);margin-top:26px;max-width:600px;font-weight:300;line-height:1.55}
+.hero-meta{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:44px;font-family:'Heebo',Arial,sans-serif;font-weight:500;font-size:14px;color:var(--muted-2)}
+.hero-meta b{color:var(--cream);font-weight:600}
+.hero-rule{width:64px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:30px 0}
+.scrollhint{position:absolute;bottom:30px;right:50%;transform:translateX(50%);color:var(--muted-2);font-size:12px;font-family:'Heebo',Arial,sans-serif;letter-spacing:.1em;text-align:center}
+.scrollhint .cv{display:block;margin-top:7px;animation:bob 1.7s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ===== KPI GRID ===== */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px}
+.kpi{background:linear-gradient(160deg,rgba(34,64,90,.35),rgba(19,39,58,.55));
+  border:1px solid var(--card-line);border-radius:14px;padding:24px 22px 20px;position:relative;
+  min-height:158px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.kpi::after{content:"";position:absolute;top:0;right:0;height:3px;width:100%;
+  background:linear-gradient(90deg,var(--gold),transparent);opacity:.75}
+.kpi .lbl{font-size:14.5px;color:var(--muted);font-weight:600}
+.kpi .num{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:clamp(30px,3vw,44px);line-height:1;color:#fff;letter-spacing:-.02em;margin-top:14px}
+.kpi .num .u{font-size:.48em;font-weight:600;color:var(--gold-soft);margin-inline-start:2px}
+.kpi .foot{font-size:12.5px;color:var(--muted-2);margin-top:10px}
+.kpi.hot{background:linear-gradient(160deg,rgba(201,168,106,.20),rgba(166,134,79,.10));border-color:rgba(201,168,106,.5)}
+.kpi.hot::after{background:linear-gradient(90deg,var(--gold-soft),transparent)}
+.kpi.hot .num{color:var(--gold-soft)}
+.kpi.teal::after{background:linear-gradient(90deg,var(--teal),transparent)}
+
+.foot-src{position:absolute;bottom:24px;left:clamp(40px,6vw,92px);font-size:12px;color:var(--muted-2)}
+
+/* ===== VIDEO SLIDE ===== */
+.vrow{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);margin-top:clamp(20px,3vw,34px)}
+.vcard{display:flex;flex-direction:column;gap:12px}
+.vframe{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--card-line);aspect-ratio:9/16;background:#000;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.vframe video{width:100%;height:100%;object-fit:cover;display:block}
+.playbtn{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;background:rgba(201,168,106,.92);color:#0B1622;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding-inline-start:4px;box-shadow:0 6px 20px rgba(0,0,0,.4);transition:transform .15s,opacity .2s}
+.playbtn:hover{transform:scale(1.08)}
+.vframe.playing .playbtn{opacity:0;pointer-events:none}
+#video figcaption{display:flex;flex-direction:column;gap:2px;padding-inline-start:2px}
+.vt{font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:15px;color:var(--cream)}
+.vs{font-size:12.5px;color:var(--muted-2);line-height:1.35}
+.vfoot{position:absolute;bottom:24px;left:clamp(40px,6vw,92px);right:clamp(40px,6vw,92px);display:flex;justify-content:space-between;color:var(--muted-2);font-size:12px}
+.vfoot .num{direction:ltr;font-family:'Heebo',Arial,sans-serif;color:var(--gold);letter-spacing:.12em}
+@media(max-width:900px){.vrow{grid-template-columns:repeat(2,1fr)}}
+
+/* ===================== MOBILE (≤768px) — desktop untouched ===================== */
+@media (max-width:768px){
+  /* natural scrolling so tall slides (KPIs / videos) aren't cut off */
+  .deck{scroll-snap-type:none;height:100dvh}
+  section.slide{scroll-snap-align:none;min-height:100dvh;height:auto;
+    justify-content:flex-start;padding:84px 22px 76px}
+  #hero{justify-content:center}
+  /* side dots would overlap content on small screens */
+  #dots{display:none}
+  .brand{height:34px;top:20px;left:22px}
+  /* hero */
+  #hero h1{font-size:clamp(32px,8.5vw,44px)}
+  .hero-badge{margin-bottom:22px;font-size:12px;padding:7px 13px}
+  #hero .sub{font-size:16px;margin-top:20px}
+  .hero-meta{gap:8px 22px;margin-top:30px;font-size:13px}
+  .hero-rule{margin:22px 0}
+  /* section headings */
+  .shead h2{font-size:clamp(26px,7vw,34px)}
+  .shead p{font-size:15px}
+  /* KPI grid → 2 columns */
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:12px;margin-top:26px}
+  .kpi{padding:18px 16px 16px}
+  .kpi .num{font-size:clamp(26px,7vw,34px)}
+  .kpi .lbl{font-size:13px}
+  /* video grids → 2 columns */
+  .vrow{grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+  .vt{font-size:14px}
+  .vs{font-size:12px}
+  .playbtn{width:46px;height:46px;font-size:17px}
+  /* footers flow after content instead of absolute (prevents overlap) */
+  .foot-src{position:static;margin-top:26px}
+  .vfoot{position:static;margin-top:22px;left:auto;right:auto}
+}
+/* very small phones */
+@media (max-width:400px){
+  section.slide{padding:76px 16px 68px}
+  .vrow{gap:10px}
+}
+
+/* ===== FEED COMPARE SLIDE ===== */
+#feed-compare .cmp{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,60px);margin-top:clamp(16px,2.4vw,28px);align-items:end;justify-items:center}
+#feed-compare figure{display:flex;flex-direction:column;align-items:center;gap:14px}
+#feed-compare .shot{border-radius:14px;overflow:hidden;border:1px solid var(--card-line);box-shadow:0 16px 44px rgba(0,0,0,.5);background:#0a1420;line-height:0}
+#feed-compare .shot img{display:block;height:min(50vh,480px);width:auto;max-width:100%}
+#feed-compare .cap{font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:clamp(15px,1.5vw,19px);color:var(--cream);display:flex;align-items:center;gap:9px}
+#feed-compare .cap .dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}
+#feed-compare .cap.old{color:var(--muted-2)}
+#feed-compare .cap.old .dot{background:var(--muted-2)}
+#feed-compare{padding-block:clamp(40px,5vh,76px)}
+#feed-compare .improve{margin-top:clamp(14px,2vw,24px);border-top:1px solid var(--card-line);padding-top:clamp(14px,1.6vw,20px)}
+#feed-compare .improve-h{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:.05em;color:var(--gold);margin-bottom:14px}
+#feed-compare .imp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,26px)}
+#feed-compare .imp{display:flex;flex-direction:column;gap:5px}
+#feed-compare .imp-t{font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:clamp(15px,1.4vw,17px);color:var(--cream)}
+#feed-compare .imp-d{font-size:clamp(13px,1.2vw,14.5px);color:var(--muted);line-height:1.5}
+@media(max-width:768px){
+  #feed-compare .cmp{gap:12px}
+  #feed-compare .shot img{height:min(40vh,340px)}
+  #feed-compare .cap{font-size:14px;gap:7px}
+  #feed-compare .imp-grid{grid-template-columns:1fr;gap:14px}
+}
+
+/* ===== goal & strategy slide ===== */
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:32px}
+.gcard{background:linear-gradient(160deg,rgba(34,64,90,.32),rgba(19,39,58,.5));border:1px solid var(--card-line);border-radius:18px;padding:26px 26px 28px;position:relative;overflow:hidden;min-height:262px}
+.gcard::after{content:"";position:absolute;top:0;right:0;height:3px;width:100%;background:linear-gradient(90deg,var(--gold),transparent);opacity:.8}
+.gtop{display:flex;justify-content:space-between;align-items:center}
+.gnum{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:20px;color:var(--gold)}
+.gtag{font-size:12px;font-weight:600;color:var(--muted);border:1px solid var(--card-line);border-radius:100px;padding:5px 12px}
+.gicon{width:50px;height:50px;color:var(--gold-soft);margin:20px 0 16px}
+.gicon svg{width:100%;height:100%}
+.gtitle{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:22px;color:#fff;letter-spacing:-.01em;margin-bottom:10px}
+.gdesc{font-size:14.5px;color:var(--muted);line-height:1.55}
+.foot-strip{position:absolute;bottom:46px;right:clamp(40px,6vw,92px);left:clamp(40px,6vw,92px);display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,rgba(201,168,106,.12),rgba(79,165,184,.06));border:1px solid rgba(201,168,106,.28);border-radius:12px;padding:15px 22px}
+.foot-strip .ar{color:var(--gold);font-size:20px;font-family:'Heebo'}
+.foot-strip p{font-size:15.5px;color:var(--cream)}
+.foot-strip b{color:var(--gold-soft);font-weight:700}
+
+/* ===== DATA · CORE METRICS COMPARE (2025 vs 2026) ===== */
+#core-compare .cmp-tbl{margin-top:clamp(20px,2.6vw,32px);border:1px solid var(--card-line);border-radius:16px;overflow:hidden;background:linear-gradient(160deg,rgba(34,64,90,.30),rgba(19,39,58,.52))}
+#core-compare .crow{display:grid;grid-template-columns:1.5fr 1fr auto 1fr 1.15fr;align-items:center;gap:clamp(8px,1.4vw,24px);padding:clamp(13px,1.35vw,17px) clamp(18px,2.4vw,30px);border-bottom:1px solid rgba(34,64,90,.55)}
+#core-compare .crow:last-child{border-bottom:0}
+#core-compare .crow.head{background:rgba(11,22,34,.45);border-bottom:1px solid var(--card-line)}
+#core-compare .crow.head span{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.05em;color:var(--muted-2)}
+#core-compare .crow.head .h-25,#core-compare .crow.head .h-26{text-align:center}
+#core-compare .crow.hl{background:rgba(79,165,184,.055)}
+#core-compare .m-name{font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:clamp(14.5px,1.35vw,17px);color:var(--cream)}
+#core-compare .m-name .sub{display:block;font-family:'Assistant';font-weight:400;font-size:11.5px;color:var(--muted-2);margin-top:2px}
+#core-compare .v25{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:clamp(14px,1.4vw,17px);color:var(--muted);direction:ltr;text-align:center}
+#core-compare .arw{color:var(--muted-2);font-size:13px;text-align:center;opacity:.55}
+#core-compare .v26{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:clamp(16px,1.7vw,21px);color:#fff;direction:ltr;text-align:center;letter-spacing:-.01em}
+#core-compare .chg{justify-self:start;font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:13px;padding:5px 11px;border-radius:100px;display:inline-flex;align-items:center;gap:5px;direction:ltr;border:1px solid transparent;white-space:nowrap}
+#core-compare .chg .tri{font-size:9px;line-height:1}
+#core-compare .chg.up{color:var(--gold-soft);background:rgba(201,168,106,.12);border-color:rgba(201,168,106,.32)}
+#core-compare .chg.eff{color:var(--teal-soft);background:rgba(79,165,184,.15);border-color:rgba(79,165,184,.38)}
+#core-compare .chg.ctx{color:var(--muted);background:rgba(157,176,192,.08);border-color:rgba(157,176,192,.2)}
+#core-compare .cc-note{margin-top:clamp(16px,2vw,24px);display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,rgba(79,165,184,.13),rgba(201,168,106,.05));border:1px solid rgba(79,165,184,.3);border-radius:12px;padding:14px 22px}
+#core-compare .cc-note .ar{color:var(--teal);font-size:20px;font-family:'Heebo',Arial,sans-serif;flex:none}
+#core-compare .cc-note p{font-size:clamp(13.5px,1.3vw,15.5px);color:var(--cream);line-height:1.5}
+#core-compare .cc-note b{color:var(--teal-soft);font-weight:700}
+#core-compare .cc-src{margin-top:13px;font-size:12px;color:var(--muted-2)}
+@media(max-width:768px){
+  #core-compare .crow{grid-template-columns:1fr auto 1fr;grid-template-areas:"name name name" "v25 arw v26" "chg chg chg";gap:7px 12px;padding:14px 16px}
+  #core-compare .crow.head{display:none}
+  #core-compare .m-name{grid-area:name}
+  #core-compare .v25{grid-area:v25;text-align:start}
+  #core-compare .arw{grid-area:arw}
+  #core-compare .v26{grid-area:v26;text-align:end}
+  #core-compare .chg{grid-area:chg;margin-top:2px}
+}
+
+/* ===== DATA · ENGAGEMENT / SAVES ===== */
+#engage .eng-hero{margin-top:clamp(18px,2.4vw,30px);display:grid;grid-template-columns:1.12fr 1fr;gap:clamp(16px,2.2vw,30px);align-items:stretch}
+#engage .save-card{background:linear-gradient(160deg,rgba(201,168,106,.20),rgba(166,134,79,.07));border:1px solid rgba(201,168,106,.5);border-radius:18px;padding:clamp(22px,2.6vw,32px);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+#engage .save-card::after{content:"";position:absolute;top:0;right:0;height:3px;width:100%;background:linear-gradient(90deg,var(--gold-soft),transparent)}
+#engage .save-eyebrow{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;color:var(--gold-soft);display:flex;align-items:center;gap:8px}
+#engage .save-x{font-family:'Heebo',Arial,sans-serif;font-weight:900;font-size:clamp(62px,8.5vw,110px);line-height:.9;color:var(--gold-soft);letter-spacing:-.03em;margin:clamp(8px,1.3vw,14px) 0 clamp(4px,.8vw,8px)}
+#engage .save-pill{align-self:flex-start;font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:14px;color:#0B1622;background:linear-gradient(90deg,var(--gold),var(--gold-soft));border-radius:100px;padding:6px 15px;direction:ltr}
+#engage .bars{margin-top:clamp(16px,2vw,22px);display:flex;flex-direction:column;gap:11px}
+#engage .barrow{display:grid;grid-template-columns:38px 1fr 52px;align-items:center;gap:12px}
+#engage .barrow .yr{font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:13px;color:var(--muted)}
+#engage .track{height:14px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden}
+#engage .fill{height:100%;border-radius:100px}
+#engage .fill.old{background:linear-gradient(90deg,rgba(124,144,162,.55),var(--muted-2))}
+#engage .fill.new{background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+#engage .barrow .val{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:16px;color:#fff;direction:ltr;text-align:left}
+#engage .save-sub{font-size:14px;color:var(--cream);opacity:.92;line-height:1.55;margin-top:clamp(14px,1.8vw,20px)}
+#engage .eng-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:center}
+#engage .ecard{background:linear-gradient(160deg,rgba(34,64,90,.35),rgba(19,39,58,.55));border:1px solid var(--card-line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:9px;position:relative;overflow:hidden}
+#engage .ecard::after{content:"";position:absolute;top:0;right:0;height:2px;width:100%;background:linear-gradient(90deg,var(--teal),transparent);opacity:.6}
+#engage .ecard.dn::after{background:linear-gradient(90deg,var(--muted-2),transparent);opacity:.4}
+#engage .ecard .en{font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:14.5px;color:var(--cream)}
+#engage .ecard .ev{display:flex;align-items:baseline;gap:8px;direction:ltr}
+#engage .ecard .ev .a{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:14px;color:var(--muted)}
+#engage .ecard .ev .arw{color:var(--muted-2);font-size:12px}
+#engage .ecard .ev .b{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:21px;color:#fff;letter-spacing:-.01em}
+#engage .ecard .chg{align-self:flex-start;font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:12.5px;padding:3px 10px;border-radius:100px;direction:ltr;border:1px solid transparent}
+#engage .chg.up{color:var(--teal-soft);background:rgba(79,165,184,.15);border-color:rgba(79,165,184,.38)}
+#engage .chg.gold{color:var(--gold-soft);background:rgba(201,168,106,.12);border-color:rgba(201,168,106,.32)}
+#engage .chg.ctx{color:var(--muted);background:rgba(157,176,192,.08);border-color:rgba(157,176,192,.2)}
+#engage .eng-note{margin-top:clamp(16px,2vw,24px);display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,rgba(201,168,106,.12),rgba(79,165,184,.05));border:1px solid rgba(201,168,106,.3);border-radius:12px;padding:14px 22px}
+#engage .eng-note .ar{color:var(--gold);font-size:18px;font-family:'Heebo',Arial,sans-serif;flex:none}
+#engage .eng-note p{font-size:clamp(13.5px,1.3vw,15.5px);color:var(--cream);line-height:1.5}
+#engage .eng-note b{color:var(--gold-soft);font-weight:700}
+#engage .eng-src{margin-top:13px;font-size:12px;color:var(--muted-2)}
+@media(max-width:768px){
+  #engage .eng-hero{grid-template-columns:1fr;gap:14px}
+  #engage .eng-grid{grid-template-columns:1fr 1fr}
+  #engage .save-x{font-size:clamp(56px,17vw,84px)}
+}
+
+/* ===== DATA · ENGAGEMENT COMPARE TABLE ===== */
+#engage-tbl .cmp-tbl{margin-top:clamp(20px,2.6vw,32px);border:1px solid var(--card-line);border-radius:16px;overflow:hidden;background:linear-gradient(160deg,rgba(34,64,90,.30),rgba(19,39,58,.52))}
+#engage-tbl .crow{display:grid;grid-template-columns:1.5fr 1fr auto 1fr 1.3fr;align-items:center;gap:clamp(8px,1.4vw,24px);padding:clamp(13px,1.35vw,17px) clamp(18px,2.4vw,30px);border-bottom:1px solid rgba(34,64,90,.55)}
+#engage-tbl .crow:last-child{border-bottom:0}
+#engage-tbl .crow.head{background:rgba(11,22,34,.45);border-bottom:1px solid var(--card-line)}
+#engage-tbl .crow.head span{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.05em;color:var(--muted-2)}
+#engage-tbl .crow.head .h-25,#engage-tbl .crow.head .h-26{text-align:center}
+#engage-tbl .crow.hl{background:rgba(201,168,106,.09)}
+#engage-tbl .m-name{font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:clamp(14.5px,1.35vw,17px);color:var(--cream)}
+#engage-tbl .m-name .sub{display:block;font-family:'Assistant';font-weight:400;font-size:11.5px;color:var(--muted-2);margin-top:2px}
+#engage-tbl .crow.hl .m-name{color:#fff}
+#engage-tbl .v25{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:clamp(14px,1.4vw,17px);color:var(--muted);direction:ltr;text-align:center}
+#engage-tbl .arw{color:var(--muted-2);font-size:13px;text-align:center;opacity:.55}
+#engage-tbl .v26{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:clamp(16px,1.7vw,21px);color:#fff;direction:ltr;text-align:center;letter-spacing:-.01em}
+#engage-tbl .crow.hl .v26{color:var(--gold-soft)}
+#engage-tbl .chg{justify-self:start;font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:13px;padding:5px 11px;border-radius:100px;display:inline-flex;align-items:center;gap:5px;direction:ltr;border:1px solid transparent;white-space:nowrap}
+#engage-tbl .chg .tri{font-size:9px;line-height:1}
+#engage-tbl .chg.up{color:var(--gold-soft);background:rgba(201,168,106,.15);border-color:rgba(201,168,106,.4)}
+#engage-tbl .chg.eff{color:var(--teal-soft);background:rgba(79,165,184,.15);border-color:rgba(79,165,184,.38)}
+#engage-tbl .chg.ctx{color:var(--muted);background:rgba(157,176,192,.08);border-color:rgba(157,176,192,.2)}
+#engage-tbl .eng-src{margin-top:13px;font-size:12px;color:var(--muted-2)}
+@media(max-width:768px){
+  #engage-tbl .crow{grid-template-columns:1fr auto 1fr;grid-template-areas:"name name name" "v25 arw v26" "chg chg chg";gap:7px 12px;padding:14px 16px}
+  #engage-tbl .crow.head{display:none}
+  #engage-tbl .m-name{grid-area:name}
+  #engage-tbl .v25{grid-area:v25;text-align:start}
+  #engage-tbl .arw{grid-area:arw}
+  #engage-tbl .v26{grid-area:v26;text-align:end}
+  #engage-tbl .chg{grid-area:chg;margin-top:2px}
+}
+
+/* ===== DATA · ORGANIC / PAGE PRESENCE ===== */
+#organic .plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.2vw,26px);margin-top:clamp(20px,2.6vw,32px)}
+#organic .plat{background:linear-gradient(160deg,rgba(34,64,90,.35),rgba(19,39,58,.55));border:1px solid var(--card-line);border-radius:18px;padding:clamp(20px,2.3vw,28px) clamp(22px,2.4vw,30px);position:relative;overflow:hidden}
+#organic .plat::after{content:"";position:absolute;top:0;right:0;height:3px;width:100%}
+#organic .plat.fb::after{background:linear-gradient(90deg,var(--teal),transparent)}
+#organic .plat.ig::after{background:linear-gradient(90deg,var(--gold),transparent)}
+#organic .plat-head{display:flex;align-items:center;gap:11px;margin-bottom:clamp(10px,1.4vw,16px)}
+#organic .plat-dot{width:12px;height:12px;border-radius:4px;flex:none}
+#organic .plat.fb .plat-dot{background:var(--teal)}
+#organic .plat.ig .plat-dot{background:var(--gold)}
+#organic .plat-name{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:clamp(18px,1.8vw,22px);color:#fff;letter-spacing:-.01em}
+#organic .mrow{display:grid;grid-template-columns:1.25fr 1fr auto;align-items:center;gap:10px;padding:clamp(11px,1.15vw,14px) 0;border-top:1px solid rgba(34,64,90,.55)}
+#organic .mrow:first-of-type{border-top:0}
+#organic .mlbl{font-family:'Assistant';font-weight:600;font-size:14px;color:var(--cream)}
+#organic .mval{font-family:'Heebo',Arial,sans-serif;font-weight:600;font-size:14px;color:var(--muted);direction:ltr;text-align:center;white-space:nowrap}
+#organic .mval .ar{color:var(--muted-2);font-size:11px;margin:0 4px}
+#organic .mval b{color:#fff;font-weight:800;font-size:16px;letter-spacing:-.01em}
+#organic .mchg{justify-self:end;font-family:'Heebo',Arial,sans-serif;font-weight:700;font-size:12.5px;padding:3px 10px;border-radius:100px;direction:ltr;border:1px solid transparent;white-space:nowrap}
+#organic .mchg.up{color:var(--teal-soft);background:rgba(79,165,184,.15);border-color:rgba(79,165,184,.38)}
+#organic .mchg.gold{color:var(--gold-soft);background:rgba(201,168,106,.13);border-color:rgba(201,168,106,.34)}
+#organic .mchg.new{color:var(--muted);background:rgba(157,176,192,.08);border-color:rgba(157,176,192,.2)}
+#organic .org-note{margin-top:clamp(16px,2vw,24px);display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,rgba(79,165,184,.1),rgba(201,168,106,.06));border:1px solid rgba(79,165,184,.28);border-radius:12px;padding:14px 22px}
+#organic .org-note .ar{color:var(--teal);font-size:20px;font-family:'Heebo',Arial,sans-serif;flex:none}
+#organic .org-note p{font-size:clamp(13.5px,1.3vw,15.5px);color:var(--cream);line-height:1.5}
+#organic .org-note b{color:var(--teal-soft);font-weight:700}
+#organic .org-src{margin-top:13px;font-size:12px;color:var(--muted-2)}
+@media(max-width:768px){#organic .plat-grid{grid-template-columns:1fr;gap:14px}}
+
+/* Additional page performance slides */
+.insights-added .shead h2{font-size:clamp(30px,3.6vw,48px)}
+.insight-layout{display:grid;grid-template-columns:.8fr 1.6fr;gap:30px;margin-top:34px;align-items:stretch}
+.insight-hero{border:1px solid rgba(201,168,106,.5);border-radius:18px;padding:28px;background:linear-gradient(150deg,rgba(201,168,106,.18),rgba(201,168,106,.04));display:flex;flex-direction:column;justify-content:center}
+.insight-platform{font-family:'Heebo',Arial,sans-serif;font-size:17px;color:var(--gold-soft);text-align:right}
+.insight-percent{font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:clamp(65px,7vw,96px);line-height:1.1;color:var(--gold-soft);text-align:right;margin:12px 0}
+.insight-hero h3{font-size:23px}.insight-hero p{font-size:17px;color:var(--muted);margin-top:10px;line-height:1.5}
+.insight-data{display:flex;align-items:center;border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line)}
+.insight-data table{width:100%;border-collapse:collapse;font-size:19px}.insight-data th{text-align:right;font-weight:600}.insight-data thead th{font-size:14px;color:var(--muted);padding:17px 12px}.insight-data tbody th,.insight-data td{padding:21px 12px;border-top:1px solid var(--card-line)}
+.insight-data td{direction:ltr;text-align:center;font-family:'Heebo',Arial,sans-serif;white-space:nowrap;color:var(--muted)}.insight-data thead th:not(:first-child){text-align:center}.insight-data .current{font-weight:800;color:#fff;font-size:23px}.insight-data .growth{font-weight:700;color:var(--teal-soft)}
+.insight-summary{margin-top:26px;border-right:3px solid var(--gold);padding:10px 20px;font-size:20px;line-height:1.6;color:var(--cream)}.insight-summary b{color:var(--gold-soft)}
+.insight-source{margin-top:22px;color:var(--muted);font-size:12px;line-height:1.6}
+@media(max-width:768px){.insight-layout{grid-template-columns:1fr;gap:20px}.insight-hero{padding:20px}.insight-percent{font-size:64px}.insight-data table{font-size:14px}.insight-data tbody th,.insight-data td{padding:16px 6px}.insight-data .current{font-size:18px}.insight-summary{font-size:17px}}
+
+.insights-added .shead h2{display:flex;align-items:center;gap:18px}.platform-logo{display:inline-flex;flex:0 0 54px;width:54px;height:54px;vertical-align:middle}.platform-logo svg{display:block;width:100%;height:100%}.platform-logo-small{width:28px;height:28px;margin-left:9px;flex-basis:28px}.instagram-inline .platform-logo{vertical-align:middle}@media(max-width:768px){.insights-added .shead h2{gap:12px}.platform-logo{width:42px;height:42px;flex-basis:42px}.platform-logo-small{width:24px;height:24px;flex-basis:24px}}
+#guest-comments{padding-top:110px;padding-bottom:48px}#guest-comments .shead h2{font-size:clamp(32px,3.8vw,50px)}#guest-comments .shead p{max-width:850px}.guest-wall{display:grid;grid-template-columns:1fr 1.16fr 1fr;gap:24px;align-items:center;margin-top:30px}.guest-column{display:flex;flex-direction:column;gap:22px}.guest-column-center{gap:24px}.guest-comment{margin:0;background:white;border-radius:10px;padding:9px 7px;box-shadow:5px 6px 0 rgba(201,168,106,.7),0 15px 30px rgba(0,0,0,.25);border:1px solid rgba(201,168,106,.5);overflow:hidden}.guest-comment img{display:block;width:100%;height:auto}.guest-closing{font-size:23px;margin-top:30px;color:var(--muted);text-align:center}.guest-closing b{color:var(--gold-soft)}.guest-source{font-size:12px;color:var(--muted-2);margin-top:14px;text-align:center}@media(max-width:768px){#guest-comments{padding-top:90px}.guest-wall{grid-template-columns:1fr;gap:20px}.guest-column{gap:20px}.guest-closing{font-size:20px}}
+#couple-activity{padding-top:110px;padding-bottom:35px}#couple-activity .shead h2{font-size:clamp(30px,3.4vw,46px)}#couple-activity .shead p{max-width:950px}.couple-layout{display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:center;gap:25px;margin-top:24px}.couple-main{margin:0;text-align:center}.couple-photo{display:block;border:1px solid rgba(201,168,106,.55);background:#fff;border-radius:12px;overflow:hidden;cursor:zoom-in;padding:0;box-shadow:0 12px 30px #0005;width:100%}.couple-photo img{display:block;width:100%;height:100%;object-fit:contain}.couple-main .couple-photo{height:480px;background:#000}.couple-main figcaption{color:var(--gold-soft);font-size:14px;margin-top:10px}.couple-pair{display:flex;gap:14px;align-items:center}.couple-pair .couple-photo{width:50%}.couple-single .couple-photo{max-width:350px;margin:auto}.couple-footer{font-size:20px;color:var(--gold-soft);margin-top:20px;text-align:center}.couple-footer span{display:block;color:var(--muted);font-size:12px;margin-top:7px}.couple-dialog{border:1px solid var(--gold);border-radius:12px;background:var(--navy);padding:42px 12px 12px;max-width:94vw;max-height:96vh;margin:auto}.couple-dialog::backdrop{background:#000d}.couple-dialog img{display:block;max-height:84vh;max-width:88vw;object-fit:contain}.couple-close{position:absolute;top:8px;right:12px;color:white;background:transparent;border:0;font-size:22px;cursor:pointer}@media(max-width:768px){#couple-activity{padding-top:90px}.couple-layout{grid-template-columns:1fr}.couple-main{grid-row:1}.couple-main .couple-photo{height:auto}.couple-main img{height:auto}.couple-pair .couple-photo{width:50%}.couple-footer{font-size:18px}}
+#couple-activity{padding:95px 42px 22px}#couple-activity .wrap{max-width:1500px}#couple-activity .eyebrow{margin-bottom:10px}#couple-activity .shead h2{font-size:36px}#couple-activity .shead p{margin-top:9px;font-size:16px}.couple-layout{grid-template-columns:1fr 1.25fr 1fr;gap:22px;margin-top:18px}.couple-main .couple-photo{height:590px}.couple-pair{flex-direction:column;gap:14px}.couple-pair .couple-photo{width:100%;height:282px}.couple-single .couple-photo{max-width:none;height:510px}.couple-main figcaption{margin-top:6px}.couple-footer{margin-top:10px;font-size:17px}.couple-footer span{margin-top:4px}@media(max-width:768px){#couple-activity{padding:85px 20px 30px}.couple-layout{grid-template-columns:1fr}.couple-main .couple-photo{height:auto}.couple-pair .couple-photo{height:auto}.couple-single .couple-photo{height:auto}.couple-pair{flex-direction:column}#couple-activity .shead h2{font-size:30px}} #obm-events{padding:112px 60px 35px}#obm-events .wrap{max-width:1250px}#obm-events .shead h2{font-size:clamp(28px,2.8vw,40px);line-height:1.25}.obm-gallery{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1050px;margin:28px auto 0}.obm-gallery figure{margin:0;min-width:0}.obm-gallery .couple-photo{height:min(66vh,620px);background:transparent;border:0;border-radius:12px;box-shadow:none}.obm-gallery img{width:100%;height:100%;object-fit:contain}.obm-gallery figcaption{font-family:'Heebo',Arial,sans-serif;font-size:24px;font-weight:700;text-align:center;color:var(--gold-soft);margin-top:15px}@media(max-width:768px){#obm-events{padding:90px 22px 35px}.obm-gallery{grid-template-columns:1fr;gap:28px}.obm-gallery .couple-photo{height:auto}.obm-gallery img{height:auto}.obm-gallery figcaption{font-size:22px}}
+#customer-journey{padding-top:115px;padding-bottom:40px}#customer-journey .shead h2{font-size:clamp(30px,3.3vw,46px)}#customer-journey .journey-intro{max-width:1050px;font-size:20px;line-height:1.55}.journey-role{margin-top:24px;border-right:3px solid var(--gold);padding:4px 20px}.journey-role>span{font-family:'Heebo',Arial,sans-serif;color:var(--gold-soft);font-size:15px;font-weight:700}.journey-role p{font-size:20px;line-height:1.55;margin-top:7px}.journey-role b{color:var(--gold-soft)}.journey-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}.journey-pillars article{padding:22px;background:linear-gradient(140deg,#22405a55,#13273a55);border:1px solid var(--card-line);border-radius:14px;border-top:3px solid var(--gold)}.journey-question{color:var(--muted);font-size:17px}.journey-pillars h3{font-size:28px;margin:10px 0;color:var(--gold-soft)}.journey-pillars p{font-size:18px;line-height:1.55}.journey-path{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:30px;padding:20px 0;border-top:1px solid var(--card-line);font-size:20px}.journey-path i{font-style:normal;color:var(--teal)}.journey-path strong{color:var(--gold-soft)}.journey-caption{font-size:16px;color:var(--muted);margin-top:5px}@media(max-width:768px){#customer-journey{padding-top:90px}.journey-pillars{grid-template-columns:1fr}.journey-path{flex-direction:column}.journey-path i{transform:rotate(-90deg)}#customer-journey .journey-intro,.journey-role p{font-size:18px}}
+#journey-bridge{cursor:pointer;outline:none;padding-inline:6vw}.bridge-stage{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:30px;width:100%;max-width:1400px;margin:auto;min-height:430px}.bridge-end{position:relative;text-align:center;align-self:center;z-index:1}.bridge-end h2{font-family:'Heebo',Arial,sans-serif;font-size:clamp(25px,2.5vw,38px);line-height:1.4;color:var(--cream);min-height:110px}.bridge-dot{height:16px;width:16px;border-radius:50%;background:var(--gold);margin:26px auto 0;box-shadow:0 0 24px #c9a86a55}.bridge-end:after{content:'';position:absolute;bottom:7px;height:2px;width:60%;background:linear-gradient(90deg,transparent,var(--gold));right:50%;z-index:-1}.bridge-finish:after{right:auto;left:50%;background:linear-gradient(90deg,var(--gold),transparent)}.bridge-gap{text-align:center;position:relative;min-height:220px;display:flex;flex-direction:column;justify-content:center}.bridge-question{border:0;background:transparent;color:var(--cream);font-family:'Heebo',Arial,sans-serif;font-size:clamp(27px,2.7vw,40px);font-weight:700;cursor:pointer;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s;padding:10px 0}.bridge-answer{opacity:0;transform:translateY(15px);transition:opacity .65s,transform .65s;max-height:0;overflow:hidden}.bridge-answer strong{display:block;font-family:'Heebo',Arial,sans-serif;font-size:clamp(62px,6vw,90px);line-height:1.2;color:var(--gold-soft)}.bridge-answer span{display:block;font-size:25px;color:var(--gold-soft);margin-top:8px}#journey-bridge[data-step="1"] .bridge-question,#journey-bridge[data-step="2"] .bridge-question{opacity:1;transform:none}#journey-bridge[data-step="2"] .bridge-answer{opacity:1;transform:none;max-height:220px}#journey-bridge[data-step="2"] .bridge-question{font-size:25px;color:var(--muted)}@media(max-width:768px){.bridge-stage{grid-template-columns:1fr;gap:22px;padding-top:25px}.bridge-end h2{min-height:0;font-size:28px}.bridge-dot{margin-top:15px}.bridge-gap{min-height:200px}.bridge-end:after{display:none}.bridge-answer strong{font-size:64px}.bridge-question{opacity:1;transform:none}}
+.slide-page-number{position:absolute;bottom:12px;right:22px;font-family:Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.05em;color:var(--muted);direction:ltr;line-height:1;pointer-events:none}.slide.sand .slide-page-number{color:#627080}@media(max-width:768px){.slide-page-number{bottom:12px;right:16px}}
+/* Consistent Hebrew typography across the complete deck */
+body,body *{font-family:Arial,"Segoe UI",sans-serif!important}
+h1,h2,h3,h4{letter-spacing:-.025em}
+h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",Arial,sans-serif!important}/* Opening star outline, inspired by the supplied Suzuki draw-on effect */
+#hero .glowline{display:none}
+.astral-star-trace{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.astral-star-trace svg{position:absolute;width:min(58vw,820px);height:auto;left:-9%;top:50%;transform:translateY(-50%);overflow:visible;opacity:.55}
+.astral-star-trace path{fill:none;stroke:var(--gold-soft);stroke-width:.85;stroke-linecap:round;filter:drop-shadow(0 0 4px var(--gold));stroke-dasharray:1000;stroke-dashoffset:1000;animation:astralStarDraw 2.8s .35s ease-out forwards}
+@keyframes astralStarDraw{to{stroke-dashoffset:0}}
+#hero .brand{z-index:3}
+@media(max-width:768px){.astral-star-trace svg{width:105vw;left:-44%;opacity:.3}}
+@media(prefers-reduced-motion:reduce){.astral-star-trace path{animation:none;stroke-dashoffset:0}}
+.astral-star-trace svg{width:min(29vw,410px);left:10%;top:49%;opacity:.6}@media(max-width:768px){.astral-star-trace svg{width:42vw;left:5%;top:23%;opacity:.25}}#rtm-events{padding:112px 55px 40px}#rtm-events .wrap{max-width:1400px}#rtm-events .shead h2{font-size:clamp(26px,2.6vw,38px);line-height:1.3}.rtm-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;margin-top:32px;align-items:center}.rtm-gallery .couple-photo{height:min(68vh,650px);background:transparent;border:0;box-shadow:none;border-radius:8px}.rtm-gallery img{object-fit:contain;width:100%;height:100%}@media(max-width:768px){#rtm-events{padding:90px 22px 40px}.rtm-gallery{grid-template-columns:1fr;gap:24px}.rtm-gallery .couple-photo{height:auto}.rtm-gallery img{height:auto}}#post-examples{padding:110px 60px 38px}#post-examples .wrap{max-width:1250px}#post-examples .shead h2{font-size:clamp(30px,3vw,44px)}.post-gallery{display:grid;grid-template-columns:1fr 1fr;gap:42px;max-width:1080px;margin:25px auto 0}.post-gallery .couple-photo{height:min(70vh,660px);background:transparent;border:0;box-shadow:none;border-radius:8px}.post-gallery img{width:100%;height:100%;object-fit:contain}@media(max-width:768px){#post-examples{padding:90px 22px 35px}.post-gallery{grid-template-columns:1fr;gap:25px}.post-gallery .couple-photo{height:auto}.post-gallery img{height:auto}}#video-types .vrow{grid-template-columns:repeat(3,1fr);max-width:900px;margin-inline:auto}#video-types .vframe{max-height:60vh}#aria-production{padding-top:115px;padding-bottom:45px}#aria-production .shead h2{font-size:clamp(30px,3.2vw,44px)}.aria-film{max-width:1080px;margin:30px auto 0}.aria-film .vframe{aspect-ratio:16/9;max-height:67vh}.aria-film video{object-fit:contain}@media(max-width:768px){#video-types .vrow{grid-template-columns:1fr;max-width:340px}#aria-production{padding-top:90px}.aria-film{margin-top:25px}}.agency-signature{position:absolute;right:24px;bottom:15px;width:61px;height:50px;object-fit:contain;pointer-events:none;z-index:3}.slide.sand .agency-signature{filter:invert(1)}.slide-page-number{right:50%;transform:translateX(50%);bottom:12px}@media(max-width:768px){.agency-signature{width:49px;height:40px;right:15px;bottom:12px}.slide-page-number{right:50%}}.agency-signature{width:100px;height:82px;right:24px;bottom:14px;opacity:1;filter:brightness(1.35) drop-shadow(0 0 1px rgba(255,255,255,.45))}.slide.sand .agency-signature{filter:invert(1)}@media(max-width:768px){.agency-signature{width:74px;height:61px;right:15px;bottom:12px}}.co-brand-inner{width:100%;max-width:1100px;margin:auto}.co-brand-row{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:70px}.co-logo{display:flex;align-items:center;justify-content:center;height:320px}.co-logo img{display:block;object-fit:contain}.co-astral{width:350px;max-width:100%;height:auto}.co-agency{width:280px;height:280px;max-width:100%}.co-star{width:58px;height:auto;color:var(--gold-soft);justify-self:center}.co-thanks{text-align:center;font-size:64px!important;color:var(--cream);margin-bottom:45px}@media(max-width:768px){.co-brand-row{grid-template-columns:1fr;gap:22px}.co-logo{height:auto}.co-astral{width:240px}.co-agency{width:210px;height:210px}.co-star{width:35px}.co-thanks{font-size:42px!important;margin-bottom:30px}}.co-brand-row{direction:ltr}.co-logo{direction:rtl}.co-astral{width:350px;height:auto}.co-agency{width:205px;height:auto;filter:none;opacity:1}@media(max-width:768px){.co-astral{width:240px}.co-agency{width:155px;height:auto}}.co-brand-row{direction:ltr}.co-logo{direction:rtl}.co-astral{width:350px;height:auto}.co-agency{width:205px;height:auto;filter:none;opacity:1}@media(max-width:768px){.co-astral{width:240px}.co-agency{width:155px;height:auto}}.co-brand-row{direction:ltr}.co-logo{direction:rtl}.co-astral{width:350px;height:auto}.co-agency{width:205px;height:auto;filter:none;opacity:1}@media(max-width:768px){.co-astral{width:240px}.co-agency{width:155px;height:auto}}#partnership-close{background:#e8e4d9;color:#101010;display:flex;justify-content:center;gap:26px}#partnership-close .co-brand-inner{margin:0 auto;max-width:1000px}#partnership-close .co-brand-row{grid-template-columns:1fr 65px 1fr;gap:45px}#partnership-close .co-logo{height:245px}#partnership-close .co-logo img{filter:brightness(0)}#partnership-close .co-star{color:#fff;width:64px}#partnership-close .closing-thanks{font-size:clamp(70px,11vw,155px)!important;line-height:1.05;text-align:center;font-weight:800!important;color:#080808;letter-spacing:-.045em;margin:5px auto 0;width:100%;max-width:1100px}@media(max-width:768px){#partnership-close .co-brand-row{grid-template-columns:1fr 30px 1fr;gap:14px}#partnership-close .co-logo{height:170px}#partnership-close .co-star{width:28px}#partnership-close .co-agency{width:125px}#partnership-close .closing-thanks{font-size:70px!important}}#partnership-close{gap:24px}#partnership-close .co-brand-inner{max-width:850px;width:100%;margin:0 auto}#partnership-close .co-brand-row{grid-template-columns:470px 82px 174px;gap:62px;align-items:center}#partnership-close .co-logo{height:184px}#partnership-close .co-astral{width:470px;height:184px;object-fit:contain}#partnership-close .co-agency{width:174px;height:184px;object-fit:contain}#partnership-close .co-star{width:78px;height:78px}#partnership-close .closing-thanks{font-family:"Open Sans",Arial,sans-serif!important;font-weight:700!important;font-size:150px!important;line-height:1.12;letter-spacing:-.055em;width:850px;max-width:100%;margin:0 auto;text-align:center;white-space:nowrap}@media(max-width:1000px){#partnership-close .co-brand-inner{max-width:78vw}#partnership-close .co-brand-row{grid-template-columns:55fr 10fr 21fr;gap:7%;}#partnership-close .co-logo{height:17vw}#partnership-close .co-astral{width:100%;height:17vw}#partnership-close .co-agency{width:100%;height:17vw}#partnership-close .co-star{width:100%;height:auto}#partnership-close .closing-thanks{font-size:13vw!important;width:78vw}}@media(min-width:1001px){#partnership-close .closing-thanks{font-size:202px!important;letter-spacing:-.035em}} #partnership-close{padding:0;gap:0;height:100vh;min-height:100vh;overflow:hidden;background:#e8e4d9}.closing-exact-reference{display:block;width:100%;height:100%;object-fit:contain;position:absolute;inset:0}#partnership-close .slide-page-number{z-index:2}.star-position{position:absolute;width:min(24vw,340px);aspect-ratio:280/260;left:12%;top:49%;transform:translateY(-50%);perspective:1100px}.star-rotor{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:starUprightSpin 6s 3.3s cubic-bezier(.35,.03,.25,1) forwards}.astral-star-trace .star-face{position:absolute;inset:0;width:100%;height:100%;left:0;top:0;opacity:1;backface-visibility:hidden;transform:none;overflow:visible}.astral-star-trace .star-outline{transform:rotateY(0deg)}.astral-star-trace .star-white{transform:rotateY(180deg)}.astral-star-trace .star-outline path{stroke:var(--gold-soft);stroke-width:1;fill:none}.astral-star-trace .star-white path{fill:#fff;stroke:none;filter:none;animation:none;stroke-dasharray:none;stroke-dashoffset:0}@keyframes starUprightSpin{from{transform:rotateY(0deg)}to{transform:rotateY(1260deg)}}@media(max-width:768px){.star-position{width:34vw;left:7%;top:23%}.astral-star-trace .star-face{width:100%;left:0;top:0;opacity:.6}}@media(prefers-reduced-motion:reduce){.star-rotor{animation:none;transform:rotateY(180deg)}}#hero:not(.star-started) .star-rotor,#hero:not(.star-started) .star-outline path{animation-play-state:paused}#guest-comments .guest-comment{opacity:0;transform:translateY(24px) scale(.94);transform-origin:bottom right}#guest-comments.dm-entered .guest-comment{animation:guestDmArrival .55s cubic-bezier(.2,.8,.25,1.12) both;animation-delay:var(--dm-delay,0s)}@keyframes guestDmArrival{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}@media(prefers-reduced-motion:reduce){#guest-comments .guest-comment{opacity:1;transform:none;animation:none!important}}#employee-page-intro{background:#f6e6c9;color:#000;padding:7vw;justify-content:center}.employee-question{font-family:"Open Sans",Arial,sans-serif!important;font-weight:300;font-size:clamp(32px,5.3vw,90px);line-height:1.4;text-align:right;transform:translateY(-5vh);white-space:nowrap}.employee-question strong{font-weight:800}@media(max-width:768px){.employee-question{white-space:normal;font-size:9vw}}#hero .hero-refined{max-width:none;width:100%;padding-left:26%;margin:0;z-index:2}#hero .hero-period{font-size:19px;color:var(--muted);font-weight:500;margin-bottom:24px}#hero h1{font-size:clamp(32px,4.25vw,64px);line-height:1.2;letter-spacing:-.035em}#hero .hero-title-line{display:block;white-space:nowrap;color:#fff}#hero .hero-subtitle-line{display:block;font-size:.76em;font-weight:400;color:var(--gold-soft);margin-top:15px;white-space:nowrap}#hero .star-position{width:min(14.4vw,204px);left:13%;top:50%}#hero .hero-bottom-period{position:absolute;bottom:105px;right:clamp(40px,6vw,92px);font-size:15px;color:var(--muted);line-height:1.5}@media(max-width:768px){#hero .hero-refined{padding-left:0;margin-top:80px}#hero .hero-period{font-size:15px;margin-bottom:18px}#hero h1{font-size:clamp(25px,6.1vw,42px)}#hero .hero-subtitle-line{font-size:.72em}#hero .star-position{width:90px;left:calc(50% - 45px);top:24%}#hero .hero-bottom-period{right:22px;left:22px;bottom:95px;font-size:12px;text-align:center}}@media(min-width:769px){#hero .hero-refined{width:920px;max-width:100%;padding-left:270px;margin:0 auto}#hero .star-position{left:calc(50% - 460px);top:50%}#hero .hero-bottom-period{right:0;left:0;text-align:center}}@media(min-width:769px) and (max-width:1100px){#hero .hero-refined{width:800px;padding-left:210px}#hero .star-position{left:calc(50% - 400px);width:170px}#hero h1{font-size:42px}}#hero .star-outline path{animation-duration:1.6s;animation-delay:.15s}#hero .star-rotor{animation-duration:4.5s;animation-delay:1.85s}@keyframes starMomentumSpin{from{transform:rotateY(0deg)}to{transform:rotateY(2700deg)}}#hero .star-rotor{animation-name:starMomentumSpin;animation-duration:4.8s;animation-delay:1.75s;animation-timing-function:cubic-bezier(.08,.62,.2,1)}@media(prefers-reduced-motion:reduce){#hero .star-rotor{animation:none;transform:rotateY(180deg)}}@keyframes starFlowSpin{from{transform:rotateY(0deg)}to{transform:rotateY(1260deg)}}#hero .star-outline path{animation-timing-function:linear}#hero .star-rotor{animation-name:starFlowSpin;animation-duration:5.6s;animation-delay:1.75s;animation-timing-function:cubic-bezier(.25,.32,.45,1)}@media(prefers-reduced-motion:reduce){#hero .star-rotor{animation:none;transform:rotateY(180deg)}}@keyframes starShortSpin{from{transform:rotateY(0deg)}to{transform:rotateY(900deg)}}#hero .star-outline path{animation-duration:1.3s;animation-delay:.15s}#hero .star-rotor{animation-name:starShortSpin;animation-duration:4s;animation-delay:1.45s}@media(prefers-reduced-motion:reduce){#hero .star-rotor{animation:none;transform:rotateY(180deg)}}@keyframes starTwoTurns{from{transform:rotateY(0deg)}to{transform:rotateY(720deg)}}@keyframes starFinishWhite{from{fill:transparent}to{fill:#fff;stroke:#fff}}#hero .star-outline path{animation:astralStarDraw 1s .1s linear forwards,starFinishWhite .15s 3.65s linear forwards}#hero .star-rotor{animation-name:starTwoTurns;animation-duration:2.6s;animation-delay:1.1s}@media(prefers-reduced-motion:reduce){#hero .star-outline path{animation:none;fill:#fff;stroke-dashoffset:0}#hero .star-rotor{animation:none;transform:rotateY(180deg)}}@keyframes starLandOnWhite{from{transform:rotateY(0deg)}to{transform:rotateY(540deg)}}#hero .star-outline path{animation:astralStarDraw 1s .1s linear forwards;fill:none;stroke:var(--gold-soft)}#hero .star-rotor{animation-name:starLandOnWhite;animation-duration:2.6s;animation-delay:1.1s}@media(prefers-reduced-motion:reduce){#hero .star-outline path{animation:none;stroke-dashoffset:0}#hero .star-rotor{animation:none;transform:rotateY(180deg)}}.couple-dialog.comment-zoom{width:min(900px,94vw);height:94vh;max-height:94vh;overflow:auto;padding:48px 18px 20px}.couple-dialog.comment-zoom img{width:100%;height:auto;max-height:none;max-width:none;object-fit:contain;image-rendering:auto}.couple-dialog.comment-zoom .couple-close{position:sticky;display:block;margin:-38px 0 12px auto;top:0;right:auto;width:36px;height:36px;background:var(--navy);border-radius:50%;z-index:2}</style>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><style>.hr-report{background:#f5f4f0;color:#0b1622;padding:70px 7vw 65px;display:flex;align-items:center}.hr-report .wrap{width:100%;max-width:1180px}.hr-kicker{color:#95743b;font-size:14px;letter-spacing:2px;font-weight:700}.hr-report h2{font-size:clamp(32px,3.5vw,52px);line-height:1.2;margin:12px 0}.hr-sub{color:#64717b;font-size:18px;margin:0 0 24px}.hr-table{border-radius:16px;overflow:hidden;box-shadow:0 12px 40px #0b16220a}.hr-table table{width:100%;border-collapse:collapse;background:white;font-size:17px}.hr-table th,.hr-table td{padding:10px 22px;border-bottom:1px solid #dde2e4;text-align:right}.hr-table thead{background:#e8ecec;color:#536673}.hr-table td{font-weight:700;text-align:center}.hr-table tbody th{font-weight:400;width:40%}.hr-table .hr-result{background:#e4f0eb;color:#187365;font-size:22px}.hr-table .hr-result th{font-weight:700}.hr-note{font-size:12px;line-height:1.7;color:#6b737a;margin-top:18px}.hr-report .brand{filter:brightness(0)}.hr-report .agency-signature{filter:brightness(0)}</style><style>.slide .brand.hr-brand{width:135px;height:auto;object-fit:contain;filter:none!important;mix-blend-mode:multiply;top:34px;left:6vw}</style><style>.hr-horizontal .hr-table table{table-layout:fixed;font-size:16px}.hr-horizontal .hr-table th,.hr-horizontal .hr-table td{text-align:center;padding:22px 7px;width:auto}.hr-horizontal .hr-table th{font-size:14px}.hr-horizontal .hr-table td{vertical-align:middle;font-size:17px;line-height:1.6}.hr-horizontal .hr-table small{display:block;direction:rtl;font-size:11px;font-weight:400;color:#65747a;margin-bottom:10px}.hr-horizontal .hr-table td:nth-child(2){background:#e4f0eb;color:#187365}.hr-horizontal .hr-note{font-size:13px;line-height:1.9;margin-top:25px}.hr-horizontal .hr-sub{margin-bottom:35px}</style><style>#employee-page-intro{position:relative;display:flex;align-items:center;justify-content:center;}#employee-page-intro .employee-question{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:86%;margin:0;text-align:center;}</style><link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;700;800&display=swap" rel="stylesheet"><style>#paid-key-metrics .num,#paid-key-metrics .num *{font-family:'Rubik',Arial,sans-serif!important;font-variant-numeric:tabular-nums;}#paid-key-metrics .num{display:flex;align-items:baseline;justify-content:flex-start;gap:3px;font-weight:800;font-size:clamp(30px,2.8vw,42px);letter-spacing:-.025em;color:#fff;text-shadow:none;}#paid-key-metrics .num .u{font-size:.6em;font-weight:600;color:var(--gold-soft);margin:0;}#paid-key-metrics .kpi{background:linear-gradient(160deg,rgba(34,64,90,.35),rgba(19,39,58,.55));border-color:var(--card-line);}</style><style>#paid-key-metrics .kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr));}#paid-key-metrics .kpi:last-child{grid-column:2 / 4;}@media(max-width:700px){#paid-key-metrics .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));}#paid-key-metrics .kpi:last-child{grid-column:1 / -1;}}</style><style>#paid-key-metrics .kpi-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;}#paid-key-metrics .kpi:last-child{grid-column:auto;}#paid-key-metrics .kpi{padding:24px 18px 20px;}#paid-key-metrics .num{font-size:clamp(26px,2.5vw,36px);}@media(max-width:700px){#paid-key-metrics .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}</style><style>#paid-key-metrics .kpi-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;}#paid-key-metrics .kpi{padding:22px 12px 18px;}#paid-key-metrics .num{font-size:clamp(24px,2.2vw,34px);}#paid-key-metrics .kpi .lbl{font-size:13px;}#paid-key-metrics .kpi .foot{font-size:11px;}@media(max-width:1000px){#paid-key-metrics .kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}@media(max-width:600px){#paid-key-metrics .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}</style><style>#paid-key-metrics .num .million-unit{font-size:1em;font-weight:800;color:#fff;letter-spacing:-.025em;margin-left:-3px;line-height:1;}</style><style>#content-strategy h2{margin-bottom:28px;}#content-strategy .sub{line-height:1.85;margin-top:0;margin-bottom:38px;}#content-strategy .goals{margin-top:0;}</style><style>#content-strategy .sub,#content-strategy .sub b,#content-strategy .sub strong{font-weight:400!important;color:var(--muted)!important;text-shadow:none;}</style><style>#hr-creatives .wrap{width:100%;max-width:1180px}#hr-creatives h2{font-size:clamp(32px,3.5vw,50px);color:var(--navy);margin:0 0 30px}#hr-creatives .vrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}#hr-creatives .vcard{margin:0;min-width:0}#hr-creatives .vframe{aspect-ratio:9/16;max-height:62vh;background:#0b1622;border-radius:14px;overflow:hidden}#hr-creatives video{width:100%;height:100%;object-fit:contain}@media(max-width:700px){#hr-creatives .vrow{grid-template-columns:repeat(2,minmax(0,1fr))}}</style><style>#hr-creatives .hr-creative-label{display:block;text-align:center;font-size:15px;font-weight:400;color:#53636d;margin-top:12px;padding:0;background:none;}#hr-creatives .vframe{max-height:57vh;}</style><style>#hr-ambassadors .wrap{width:100%;max-width:1180px}#hr-ambassadors h2{font-size:clamp(32px,3.5vw,50px);color:var(--navy);margin:0 0 30px}#hr-ambassadors .vrow{display:grid;grid-template-columns:repeat(2,minmax(0,300px));justify-content:center;gap:36px}#hr-ambassadors .vcard{margin:0;min-width:0}#hr-ambassadors .vframe{aspect-ratio:9/16;max-height:60vh;background:#0b1622;border-radius:14px;overflow:hidden}#hr-ambassadors video{width:100%;height:100%;object-fit:contain}</style><style>#hr-ambassadors .ambassador-caption{display:block;text-align:center;font-size:15px;font-weight:400;color:#53636d;margin-top:12px;padding:0;background:none;}#hr-ambassadors .vframe{max-height:57vh;}</style><style>#competitor-feeds .wrap{width:100%;max-width:1180px}#competitor-feeds h2{font-size:clamp(28px,3vw,44px);margin:0 0 24px;color:white}.competitor-feed-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;max-width:1000px;margin:auto}.competitor-feed-grid figure{margin:0;text-align:center}.competitor-feed-grid figcaption{font-size:18px;color:var(--gold-soft);margin-bottom:12px;font-weight:600}.competitor-feed-grid .couple-photo{display:block;width:100%;height:62vh;border:0;padding:0;background:transparent;cursor:zoom-in}.competitor-feed-grid img{width:100%;height:100%;object-fit:contain;border-radius:8px}</style><style>#social-summary .wrap{width:100%;max-width:1180px}#social-summary h2{font-size:clamp(36px,4vw,56px);margin:0 0 24px;color:white}#social-summary .summary-intro{font-size:24px;font-weight:400;color:var(--muted);line-height:1.7;margin:0 0 34px}#social-summary h3{font-size:28px;color:var(--gold-soft);margin:0 0 22px}#social-summary ol{list-style:none;padding:0;margin:0;display:grid;gap:16px}#social-summary li{display:flex;align-items:center;gap:24px;padding:22px 28px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:14px}#social-summary .summary-index{font-size:30px;font-weight:700;color:var(--gold-soft)}#social-summary li p{margin:0;font-size:22px;line-height:1.6;color:#edf1f5;font-weight:400}</style><style>#competitor-feeds .competitor-feed-grid img{display:block;width:auto;height:100%;max-width:100%;object-fit:contain;margin:0 auto;}#competitor-feeds .competitor-feed-grid figcaption{margin:12px 0 0;}#competitor-feeds .competitor-feed-grid .couple-photo{height:62vh;background:transparent;}</style><style>#guest-comments-expanded{padding-top:95px;padding-bottom:65px}#guest-comments-expanded .wrap{width:100%;max-width:1240px}#guest-comments-expanded h2{font-size:38px;margin:12px 0}#guest-comments-expanded .shead p{font-size:17px}.expanded-comment-wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:26px;align-items:center}.expanded-column{display:flex;flex-direction:column;gap:17px}#guest-comments-expanded .guest-comment{padding:5px;opacity:0;transform:translateY(20px) scale(.95)}#guest-comments-expanded .couple-photo{display:block;width:100%;border:0;padding:0;background:white;cursor:zoom-in;border-radius:0}#guest-comments-expanded .guest-comment img{display:block;width:100%;height:auto}#guest-comments-expanded.dm-entered .guest-comment{animation:guestDmArrival .55s cubic-bezier(.2,.8,.25,1.12) both;animation-delay:var(--dm-delay)}#guest-comments-expanded .guest-closing{margin-top:22px;font-size:20px}@media(prefers-reduced-motion:reduce){#guest-comments-expanded .guest-comment{opacity:1;transform:none;animation:none!important}}</style><style>#guest-comments-expanded{padding:65px 4vw 70px;display:block}#guest-comments-expanded .wrap{max-width:none}#guest-comments-expanded .shead{margin:0 0 20px;padding-right:10px;}#guest-comments-expanded .shead .eyebrow,#guest-comments-expanded .shead p,#guest-comments-expanded .guest-closing,#guest-comments-expanded .guest-source{display:none}#guest-comments-expanded .shead h2{font-size:34px;margin:38px 0 0}.expanded-comment-wall{display:block;position:relative;margin-top:25px;height:calc(100vh - 225px)}.expanded-column{display:contents}#guest-comments-expanded .guest-comment{position:absolute;width:var(--card-width);left:var(--card-x);top:var(--card-y);box-sizing:border-box;padding:7px;box-shadow:5px 6px 0 rgba(201,168,106,.7),0 12px 25px #0003}#guest-comments-expanded .guest-comment img{max-height:none}#guest-comments-expanded .guest-comment .couple-photo{max-height:none}</style><style>#couple-activity .couple-layout{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:22px;align-items:center;margin:24px auto 0;max-width:1180px}#couple-activity .couple-pair{display:flex;flex-direction:row;gap:12px;align-items:center}#couple-activity .couple-side .couple-photo{flex:1;min-width:0;padding:0;background:transparent;height:49vh}#couple-activity .couple-side img{width:100%;height:100%;object-fit:contain;max-height:none}#couple-activity .couple-single .couple-photo{height:49vh;width:100%}#couple-activity .couple-main{margin:0}#couple-activity .couple-main .couple-photo{height:49vh;width:100%;padding:0;background:transparent}#couple-activity .couple-main img{height:100%;width:100%;object-fit:contain;max-height:none}#couple-activity .couple-footer{margin-top:18px}</style></head>
+<body>
+<div id="bar"></div>
+<div id="dots"></div>
+<div class="deck" id="deck">
+<!-- ===== COVER ===== -->
+  <section class="slide dark co-brand-slide" id="partnership-open" data-dot="אסטרל וארבעים ושתיים"><div class="co-brand-inner"><div class="co-brand-row reveal d1"><div class="co-logo"><img class="co-astral" src="media/aef607b7d4.png" alt="Astral Hotels"></div><svg class="co-star" viewBox="0 0 256 236" aria-hidden="true"><path fill="currentColor" d="M128 0 C108 56 75 90 0 118 C73 144 108 181 128 236 C151 178 189 143 256 118 C184 91 151 55 128 0Z"/></svg><div class="co-logo"><img class="co-agency" src="media/e6960922f8.svg" alt="ארבעים ושתיים — סושיאל, דיגיטל, קריאייטיב"></div></div></div><span class="slide-page-number" aria-label="שקף 1 מתוך 32">1 / 32</span></section>
+<section class="slide dark" id="hero" data-dot="שער"><div class="astral-star-trace" aria-hidden="true"><div class="star-position"><div class="star-rotor"><svg class="star-face star-outline" viewBox="-12 -12 280 260"><path pathLength="1000" d="M128 0 C108 56 75 90 0 118 C73 144 108 181 128 236 C151 178 189 143 256 118 C184 91 151 55 128 0 Z"/></svg><svg class="star-face star-white" viewBox="-12 -12 280 260"><path d="M128 0 C108 56 75 90 0 118 C73 144 108 181 128 236 C151 178 189 143 256 118 C184 91 151 55 128 0 Z"/></svg></div></div></div>
+    <div class="glowline"></div>
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="hero-inner wrap hero-refined"><div class="hero-period">מחצית ראשונה 2026</div><h1><span class="hero-title-line">בואו נסכם חציון מהמם</span><span class="hero-subtitle-line">בפעילות הסושיאל של אסטרל</span></h1></div><div class="hero-bottom-period">ינואר–יוני 2026 מול התקופה המקבילה ב־2025</div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 2 מתוך 32">2 / 32</span></section>
+
+<section id="content-strategy" class="slide dark" data-dot="מטרה ואסטרטגיה">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="eyebrow reveal">המטרה והאסטרטגיה · 2026</div>
+      <h2 class="reveal d1" style="font-family:'Heebo',Arial,sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);color:#fff;letter-spacing:-.01em;line-height:1.08">החלטנו לתת לתוכן להוביל</h2>
+      <p class="sub reveal d2" style="max-width:82ch">בסוף 2025 ישבנו והגדרנו כיוון ברור: כדי לצמוח, נעמיק בתוכן שמראה את אסטרל <b style="color:var(--cream)">מבפנים</b> — האוכל, האסתטיקה, והמלונות עצמם. שלוש מטרות תוכן שהובילו את השנה.</p>
+      <div class="goals">
+        <article class="gcard reveal d1">
+          <div class="gtop"><span class="gnum">01</span><span class="gtag">תוכן פודי</span></div>
+          <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M6 12v9M18 3c-1.7 0-3 2-3 4.5S16.3 12 18 12v9"/></svg></div>
+          <h3 class="gtitle">ASTRAL FOOD STORY</h3>
+          <p class="gdesc">להביא את חוויית האוכל של אסטרל לקדמת הבמה — סיפור קולינרי משלנו, שמעורר תיאבון וגאווה.</p>
+        </article>
+        <article class="gcard reveal d2">
+          <div class="gtop"><span class="gnum">02</span><span class="gtag">אווירה וסטייל</span></div>
+          <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.7L18.5 9l-4.6 1.3L12 15l-1.9-4.7L5.5 9l4.6-1.3z"/><circle cx="18" cy="17" r="1.4"/><circle cx="6.5" cy="16.5" r="1"/></svg></div>
+          <h3 class="gtitle">ביוטי ואסתטיקה</h3>
+          <p class="gdesc">יותר תוכן ביוטי — הרגע, האור והאסתטיקה של החופשה. התוכן שגורם לאנשים לעצור ולהתאהב.</p>
+        </article>
+        <article class="gcard reveal d3">
+          <div class="gtop"><span class="gnum">03</span><span class="gtag">חדרים ומלונות</span></div>
+          <div class="gicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13M3 21h18M9 21v-5h6v5M7 11h.01M12 11h.01M17 11h.01"/></svg></div>
+          <h3 class="gtitle">המלונות מבפנים</h3>
+          <p class="gdesc">חשיפה של החדרים, הלובי והמרחבים — להראות את המלונות כפי שהם באמת, מבפנים.</p>
+        </article></div>
+    </div>
+    <div class="foot-strip reveal d4">
+      <span class="ar">←</span>
+      <p>והתוכן הזה הוא מה ש<b>הניע את השיפור בביצועים</b> מול 2025 — כפי שנראה בהמשך.</p>
+    </div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 3 מתוך 32">3 / 32</span></section>
+
+<section class="slide dark" id="customer-journey" data-dot="אסטרטגיה · גרסה חלופית"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><div class="eyebrow reveal">התפקיד שלנו במסע הלקוח</div><h2 class="reveal d1">ההזמנה היא רגע אחד.<br>ההעדפה לאסטרל נבנית לאורך הדרך.</h2></div><div class="journey-pillars reveal d2"><article><div class="journey-question">״מה אוכלים בחופשה?״</div><h3>האוכל</h3><p>המנות, הבופה והחוויה הקולינרית<br>שנותנים סיבה לצפות לחופשה.</p></article><article><div class="journey-question">״איך החופשה תרגיש?״</div><h3>האווירה</h3><p>תוכן ביוטי, הבריכה והרגעים במלון<br>שעוזרים לדמיין את עצמנו שם.</p></article><article><div class="journey-question">״איפה נתארח?״</div><h3>החדרים והמלונות</h3><p>מבט מבפנים על החדרים והמרחבים<br>שעוזר להכיר את המקום לפני שמזמינים.</p></article></div><div class="journey-path reveal d3"><span>היכרות עם החוויה</span><i>←</i><span>עניין ומעורבות</span><i>←</i><span>רצון להתארח</span><i>←</i><strong>תמיכה בהחלטה להזמין</strong></div><p class="journey-caption reveal d3">המטרה: לקרב את הלקוח להזמנת חופשה באמצעות תוכן רלוונטי שתומך בפעילות המכר.</p></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 4 מתוך 32">4 / 32</span></section>
+
+<section class="slide dark" id="journey-bridge" data-dot="מה קורה באמצע?" tabindex="0" aria-label="מעבר מרצון לחופשה להזמנה"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="bridge-stage"><div class="bridge-end bridge-start"><h2>״וואי, אני חייב חופשה״</h2><div class="bridge-dot"></div></div><div class="bridge-gap"><button class="bridge-question" type="button">מה קורה באמצע?</button><div class="bridge-answer"><strong>אנחנו.</strong><span>בואו נראה לכם איך.</span></div></div><div class="bridge-end bridge-finish"><h2>״סגרנו חופשה באסטרל״</h2><div class="bridge-dot"></div></div></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 5 מתוך 32">5 / 32</span></section>
+
+<section class="slide dark" id="feed-compare" data-dot="הפיד · פעם מול היום">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">הסושיאל האורגני · לפני ואחרי</div>
+        <h2 class="reveal d1">מבט מלמעלה — הנראות של הפידים</h2>
+        <p class="reveal d2">בואו נראה איפה היינו ואיפה אנחנו היום.</p>
+      </div>
+
+      <div class="cmp">
+        <figure class="reveal d2">
+          <div class="shot"><img src="media/72493a2090.jpg" alt="הפיד פעם"></div>
+          <div class="cap old"><span class="dot"></span>הפיד פעם</div>
+        </figure>
+        <figure class="reveal d3">
+          <div class="shot"><img src="media/a22f4b722c.jpg" alt="הפיד היום"></div>
+          <div class="cap"><span class="dot"></span>הפיד היום</div>
+        </figure>
+      </div>
+
+      <div class="improve reveal d4">
+        <div class="improve-h">מה השתפר היום</div>
+        <div class="imp-grid">
+          <div class="imp"><span class="imp-t">מיתוג אחיד</span><span class="imp-d">לוגו A'stral ותבנית עיצוב עקבית בכל אריח — הפיד נקרא כמותג אחד מלוכד.</span></div>
+          <div class="imp"><span class="imp-t">גריד מתוכנן</span><span class="imp-d">תמהיל מאוזן של לייפסטייל, קולינרי, הצעות וסרטוני ריל בשפה ויזואלית אחת.</span></div>
+          <div class="imp"><span class="imp-t">מראה פרימיום</span><span class="imp-d">הפקה מוקפדת וצבעוניות אחידה שתואמות את מיצוב רשת המלונות.</span></div>
+        </div>
+      </div>
+    </div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 6 מתוך 32">6 / 32</span></section>
+
+<section class="slide dark" id="competitor-feeds" data-dot="הפיד שלנו לעומת המתחרים"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><h2>הפיד שלנו לעומת הפיד של המתחרים</h2><div class="competitor-feed-grid"><figure><button class="couple-photo" aria-label="הגדלת הפיד של אסטרל"><img src="media/d8c07b096c.jpg" alt="הפיד של אסטרל"></button><figcaption>אסטרל</figcaption></figure><figure><button class="couple-photo" aria-label="הגדלת הפיד של ישרוטל"><img src="media/e5395d731b.jpg" alt="הפיד של ישרוטל"></button><figcaption>ישרוטל</figcaption></figure><figure><button class="couple-photo" aria-label="הגדלת הפיד של פתאל"><img src="media/431c26c5a9.jpg" alt="הפיד של פתאל"></button><figcaption>פתאל</figcaption></figure></div></div><span class="slide-page-number" aria-label="שקף 7 מתוך 32">7 / 32</span></section><section id="paid-key-metrics" class="slide dark" data-dot="מדדי ליבה">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">מדדי מפתח · מחצית ראשונה 2026</div>
+        <h2 class="reveal d1">הפעילות הממומנת במספרים</h2>
+        <p class="reveal d2">היקף, תנועה ויעילות המדיה החברתית במחצית הראשונה של 2026.</p>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi reveal d1"><div class="lbl">תקציב מושקע</div><div class="num" dir="ltr"><span class="u">₪</span><span class="count-value" data-target="61316" data-decimals="0">61,316</span></div><div class="foot">סך ההשקעה במדיה</div></div>
+<div class="kpi reveal d3"><div class="lbl">חשיפות</div><div class="num" dir="ltr"><span class="count-value" data-target="5.29" data-decimals="2">5.29</span><span class="u million-unit">M</span></div><div class="foot">5,286,254 הופעות</div></div>
+<div class="kpi reveal d4"><div class="lbl">Reach · חשיפה ייחודית</div><div class="num" dir="ltr"><span class="count-value" data-target="3.69" data-decimals="2">3.69</span><span class="u million-unit">M</span></div><div class="foot">3,687,947 · Reach מצטבר בקמפיינים</div></div>
+<div class="kpi reveal d2"><div class="lbl">קליקים</div><div class="num" dir="ltr"><span class="count-value" data-target="100923" data-decimals="0">100,923</span></div><div class="foot">סך ההקלקות</div></div>
+<div class="kpi reveal d6"><div class="lbl">מעורבות בעמוד</div><div class="num" dir="ltr"><span class="count-value" data-target="1.44" data-decimals="2">1.44</span><span class="u million-unit">M</span></div><div class="foot">1,443,643 · מעורבויות בדף</div></div><div class="kpi reveal d6"><div class="lbl">אינטראקציות</div><div class="num" dir="ltr"><span class="count-value" data-target="30072" data-decimals="0">30,072</span></div><div class="foot">לייקים, תגובות, שמירות ושיתופים</div></div>
+        
+        
+        
+        
+        
+        
+        
+      </div>
+    </div>
+    <div class="foot-src">מקור: Meta Ads Manager · ינואר–יוני 2026</div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 8 מתוך 32">8 / 32</span></section>
+
+<section class="slide dark" id="video" data-dot="וידאו">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">המטרה · הקריאייטיב</div>
+        <h2 class="reveal d1">חשיפת החדרים והמלונות</h2>
+        <p class="reveal d2">אחת ממטרות השנה: להביא את החוויה, הנוף והעיצוב של כל מלון אל הקהל — דרך וידאו.</p>
+      </div>
+      <div class="vrow">
+        <figure class="vcard reveal d1">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/8af1793e3d.jpg">
+              <source src="media/0e16ed8f54.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">חופשה של כוכבים</span><span class="vs">המותג על פני כל רשת המלונות</span></figcaption>
+        </figure>
+        <figure class="vcard reveal d2">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/7817fa232e.jpg">
+              <source src="media/7e5056f07f.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">אריאה · הים במרחק קפיצה</span><span class="vs">המיקום והנוף של המלון</span></figcaption>
+        </figure>
+        <figure class="vcard reveal d3">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/bba5e53873.jpg">
+              <source src="media/9f33e1d28c.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">מלכת שבא · הלובי החדש</span><span class="vs">חשיפת חידוש הלובי המעוצב</span></figcaption>
+        </figure>
+        <figure class="vcard reveal d4">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/c6b2d24818.jpg">
+              <source src="media/b896163679.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">סיור אורח במלון</span><span class="vs">חוויית אירוח מלאה, מבט מבפנים</span></figcaption>
+        </figure></div>
+    </div>
+    <div class="vfoot"><span>קריאייטיב נבחר · חשיפת המלונות · 2026</span></div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 9 מתוך 32">9 / 32</span></section>
+
+<section class="slide dark" id="video-types" data-dot="סוגי סרטונים">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">הקריאייטיב · סוגי הסרטונים</div>
+        <h2 class="reveal d1">מכר · עלילתי</h2>
+        <p class="reveal d2">סרטוני מכר ממוקדי הטבה וסרטון עלילתי שמחזק את המותג.</p>
+      </div>
+      <div class="vrow">
+        <figure class="vcard reveal d1">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/4816fe9654.jpg">
+              <source src="media/7e7fe147c8.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">מכר</span><span class="vs">קיץ באסטרל · בריכה, קוקטייל ו-35% הנחה למנויים</span></figcaption>
+        </figure>
+        <figure class="vcard reveal d2">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/129264cfae.jpg">
+              <source src="media/d041579aad.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">מכר</span><span class="vs">מקדימים להזמין · חגי תשרי באסטרל</span></figcaption>
+        </figure>
+        
+        <figure class="vcard reveal d4">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/e4728d1edb.jpg">
+              <source src="media/29fd30f1b3.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">עלילתי</span><span class="vs">זמן איכות זוגי · לחיזוק הקשר</span></figcaption>
+        </figure></div>
+    </div>
+    <div class="vfoot"><span>סוגי הקריאייטיב · מכר / עלילתי · 2026</span></div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 10 מתוך 32">10 / 32</span></section>
+<section class="slide dark" id="aria-production" data-dot="הפקת סרטון למסכים באריאה"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><h2 class="reveal d1">הפקת סרטון למסכים באריאה</h2></div><figure class="vcard aria-film reveal d2"><div class="vframe"><video preload="metadata" playsinline controls><source src="media/228c5ecd11.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון אריאה">▶</button></div></figure></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 11 מתוך 32">11 / 32</span></section>
+
+<section class="slide dark" id="video-foodie" data-dot="פודי · שת&quot;פים">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">הקריאייטיב · פודי ושת"פים</div>
+        <h2 class="reveal d1">פודי · שת"פים</h2>
+        <p class="reveal d2">קריאייטיב קולינרי שמביא את הבופה והמנות של המלונות, לצד שיתופי פעולה עם יוצרי תוכן שמביאים את החוויה מזווית אישית.</p>
+      </div>
+      <div class="vrow">
+        <figure class="vcard reveal d1">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/a388cb4179.jpg">
+              <source src="media/d9c19510b7.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">פודי</span><span class="vs">בופה הסטייקים · מלון מלכת שבא</span></figcaption>
+        </figure>
+        <figure class="vcard reveal d2">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/a4f2dd66e4.jpg">
+              <source src="media/31d02d37ac.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">פודי</span><span class="vs">פוקי בול טרי · אסטרל אריאה</span></figcaption>
+        </figure>
+        <figure class="vcard reveal d3">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/25b2d87ebf.jpg">
+              <source src="media/89db773822.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">שת"פ</span><span class="vs">המלון המושלם לחופשה משפחתית</span></figcaption>
+        </figure>
+        <figure class="vcard reveal d4">
+          <div class="vframe">
+            <video preload="metadata" playsinline controls poster="media/07d45a5515.jpg">
+              <source src="media/98a7b93b9c.mp4" type="video/mp4">
+            </video>
+            <button class="playbtn" aria-label="נגן">▶</button>
+          </div>
+          <figcaption><span class="vt">שת"פ</span><span class="vs">אסטרל נירוונה סוויטס · סוויטות מרווחות</span></figcaption>
+        </figure></div>
+    </div>
+    <div class="vfoot"><span>סוגי הקריאייטיב · פודי / שת"פים · 2026</span></div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 12 מתוך 32">12 / 32</span></section>
+
+<section class="slide dark" id="core-compare" data-dot="הנתונים · מדדי ליבה">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">האסטרטגיה עבדה · הנתונים</div>
+        <h2 class="reveal d1">מדדי הליבה: 2025 מול 2026</h2>
+        <p class="reveal d2">מכאן מתחילים הנתונים. אותם מדדי מפתח, שנה מול שנה — וכאן רואים איפה התוכן הזיז את המחט: יותר תנועה ופעולה, במחיר יעיל יותר.</p>
+      </div>
+
+      <div class="cmp-tbl">
+        <div class="crow head reveal">
+          <span>מדד</span>
+          <span class="h-25">2025</span>
+          <span></span>
+          <span class="h-26">2026</span>
+          <span>שינוי</span>
+        </div>
+
+        <div class="crow reveal d1">
+          <div class="m-name">תקציב מושקע<span class="sub">סך ההשקעה במדיה</span></div>
+          <div class="v25">50,388 ₪</div>
+          <div class="arw">←</div>
+          <div class="v26">61,316 ₪</div>
+          <div class="chg up"><span class="tri">▲</span> 22%</div>
+        </div>
+
+        <div class="crow reveal d2">
+          <div class="m-name">חשיפות<span class="sub">Impressions</span></div>
+          <div class="v25">4.89M</div>
+          <div class="arw">←</div>
+          <div class="v26">5.29M</div>
+          <div class="chg up"><span class="tri">▲</span> 8%</div>
+        </div>
+
+        <div class="crow reveal d3">
+          <div class="m-name">Reach · חשיפה ייחודית<span class="sub">אנשים ייחודיים</span></div>
+          <div class="v25">4.15M</div>
+          <div class="arw">←</div>
+          <div class="v26">3.69M</div>
+          <div class="chg ctx"><span class="tri">▼</span> 11%</div>
+        </div>
+
+        <div class="crow hl reveal d4">
+          <div class="m-name">קליקים<span class="sub">לאתר ולנכסים</span></div>
+          <div class="v25">62,256</div>
+          <div class="arw">←</div>
+          <div class="v26">100,923</div>
+          <div class="chg eff"><span class="tri">▲</span> 62%</div>
+        </div>
+
+        <div class="crow hl reveal d5">
+          <div class="m-name">CTR · שיעור הקלקה<span class="sub">קליקים ÷ חשיפות</span></div>
+          <div class="v25">1.27%</div>
+          <div class="arw">←</div>
+          <div class="v26">1.91%</div>
+          <div class="chg eff"><span class="tri">▲</span> 50%</div>
+        </div>
+
+        <div class="crow hl reveal d6">
+          <div class="m-name">עלות לקליק<span class="sub">CPC ממוצע</span></div>
+          <div class="v25">0.81 ₪</div>
+          <div class="arw">←</div>
+          <div class="v26">0.61 ₪</div>
+          <div class="chg eff"><span class="tri">▼</span> 25%</div>
+        </div>
+
+        <div class="crow reveal d7">
+          <div class="m-name">CPM · ל־1,000 חשיפות<span class="sub">עלות אלף חשיפות</span></div>
+          <div class="v25">10.30 ₪</div>
+          <div class="arw">←</div>
+          <div class="v26">11.60 ₪</div>
+          <div class="chg ctx"><span class="tri">▲</span> 13%</div>
+        </div>
+      </div>
+
+      <div class="cc-note reveal d8">
+        <span class="ar">←</span>
+        <p>לא רק הוצאנו יותר — <b>המדיה עבדה חכם יותר</b>. הקליקים זינקו ב-62% וה-CTR ב-50%, בזמן שעלות הקליק ירדה ב-25%. הגענו לפחות אנשים, אבל הרבה יותר מהם פעלו.</p>
+      </div>
+      <div class="cc-src">מקור: Meta Ads Manager · ינואר–יוני · 2025 מול 2026</div>
+    </div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 13 מתוך 32">13 / 32</span></section>
+
+<section class="slide dark" id="engage-tbl" data-dot="מעורבות · שנה מול שנה">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">האסטרטגיה עבדה · מעורבות</div>
+        <h2 class="reveal d1">מעורבות — שנה מול שנה</h2>
+        <p class="reveal d2">כל מדדי המעורבות מהמנהל מודעות, 2025 מול 2026. הכוכב של השנה: שמירות הפוסט, שקפצו פי 3.4.</p>
+      </div>
+
+      <div class="cmp-tbl">
+        <div class="crow head reveal">
+          <span>מדד</span>
+          <span class="h-25">2025</span>
+          <span></span>
+          <span class="h-26">2026</span>
+          <span>שינוי</span>
+        </div>
+
+        <div class="crow hl reveal d1">
+          <div class="m-name">שמירות פוסט<span class="sub">הכוונה הגבוהה ביותר</span></div>
+          <div class="v25">282</div>
+          <div class="arw">←</div>
+          <div class="v26">970</div>
+          <div class="chg up"><span class="tri">▲</span> 244% · ×3.4</div>
+        </div>
+
+        <div class="crow reveal d2">
+          <div class="m-name">ריאקשנים<span class="sub">Reactions</span></div>
+          <div class="v25">28,589</div>
+          <div class="arw">←</div>
+          <div class="v26">29,383</div>
+          <div class="chg eff"><span class="tri">▲</span> 3%</div>
+        </div>
+
+        <div class="crow reveal d3">
+          <div class="m-name">לייקים לעמוד<span class="sub">Facebook likes</span></div>
+          <div class="v25">64</div>
+          <div class="arw">←</div>
+          <div class="v26">108</div>
+          <div class="chg eff"><span class="tri">▲</span> 69%</div>
+        </div>
+
+        <div class="crow reveal d4">
+          <div class="m-name">אינטראקציות<span class="sub">סך הפעולות</span></div>
+          <div class="v25">30,950</div>
+          <div class="arw">←</div>
+          <div class="v26">31,949</div>
+          <div class="chg eff"><span class="tri">▲</span> 3%</div>
+        </div>
+
+        <div class="crow reveal d5">
+          <div class="m-name">תגובות<span class="sub">Comments</span></div>
+          <div class="v25">498</div>
+          <div class="arw">←</div>
+          <div class="v26">426</div>
+          <div class="chg ctx"><span class="tri">▼</span> 14%</div>
+        </div>
+
+        <div class="crow reveal d6">
+          <div class="m-name">שיתופים<span class="sub">Shares</span></div>
+          <div class="v25">1,581</div>
+          <div class="arw">←</div>
+          <div class="v26">1,170</div>
+          <div class="chg ctx"><span class="tri">▼</span> 26%</div>
+        </div>
+      </div>
+      <div class="eng-src">מקור: Meta Ads Manager · אינטראקציות בפוסטים · ינואר–יוני · 2025 מול 2026</div>
+    </div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 14 מתוך 32">14 / 32</span></section>
+
+<section class="slide dark" id="engage" data-dot="מעורבות · שמירות">
+    <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
+    <div class="wrap">
+      <div class="shead">
+        <div class="eyebrow reveal">האסטרטגיה עבדה · מעורבות</div>
+        <h2 class="reveal d1">המעורבות לא רק גדלה — היא העמיקה</h2>
+        <p class="reveal d2">המדד הבולט של 2026: שמירות פוסט שילשו את עצמן. שמירה היא פעולת הכוונה הגבוהה ביותר — והנה כל תמונת המעורבות שמאחוריה.</p>
+      </div>
+
+      <div class="eng-hero">
+        <div class="save-card reveal d1">
+          <div class="save-eyebrow">✦ שמירות פוסט · המדד החזק ביותר</div>
+          <div class="save-x">×3.4</div>
+          <div class="save-pill">+244% מול 2025</div>
+          <div class="bars">
+            <div class="barrow"><span class="yr">2025</span><div class="track"><div class="fill old" style="width:29%"></div></div><span class="val">282</span></div>
+            <div class="barrow"><span class="yr">2026</span><div class="track"><div class="fill new" style="width:100%"></div></div><span class="val">970</span></div>
+          </div>
+          <div class="save-sub">שמירה = המשתמש מסמן לעצמו לחזור, לתכנן ולהזמין. שהמדד הזה משלש את עצמו — זה בדיוק הסימן שהתוכן פוגע במקום הנכון.</div>
+        </div>
+
+        <div class="eng-grid">
+          <div class="ecard reveal d2">
+            <span class="en">ריאקשנים</span>
+            <div class="ev"><span class="a">28,589</span><span class="arw">→</span><span class="b">29,383</span></div>
+            <span class="chg up">+3%</span>
+          </div>
+          <div class="ecard reveal d3">
+            <span class="en">לייקים לעמוד</span>
+            <div class="ev"><span class="a">64</span><span class="arw">→</span><span class="b">108</span></div>
+            <span class="chg up">+69%</span>
+          </div>
+          <div class="ecard dn reveal d4">
+            <span class="en">תגובות</span>
+            <div class="ev"><span class="a">498</span><span class="arw">→</span><span class="b">426</span></div>
+            <span class="chg ctx">−14%</span>
+          </div>
+          <div class="ecard dn reveal d5">
+            <span class="en">שיתופים</span>
+            <div class="ev"><span class="a">1,581</span><span class="arw">→</span><span class="b">1,170</span></div>
+            <span class="chg ctx">−26%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="eng-note reveal d6">
+        <span class="ar">✦</span>
+        <p>סך האינטראקציות עלה קלות (<b>+3%</b>) — אבל ההרכב השתנה: המעורבות נעשתה <b>עמוקה יותר</b>. פעולות הכוונה הגבוהה (שמירות, לייקים) צמחו, בזמן שהאינטראקציות הקלות התמתנו.</p>
+      </div>
+      <div class="eng-src">מקור: Meta Ads Manager · אינטראקציות בפוסטים · ינואר–יוני · 2025 מול 2026</div>
+    </div>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 15 מתוך 32">15 / 32</span></section>
+
+<section class="slide dark insights-added" id="facebook-highlights" data-dot="Facebook · הישגים"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><div class="eyebrow reveal">ביצועי העמודים · Facebook · הישגים בולטים</div><h2 class="reveal d1"><span class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Facebook"><circle cx="24" cy="24" r="24" fill="#1877F2"/><path fill="white" d="M27.5 48V29.4h6.3l.95-7.3H27.5v-4.65c0-2.1.59-3.55 3.63-3.55H35V7.37c-.67-.09-2.97-.28-5.65-.28-5.59 0-9.42 3.41-9.42 9.68v5.33H13.6v7.3h6.33V48z"/></svg></span><span>יותר מעורבות, יותר ביקורים בעמוד</span></h2><p class="reveal d2">מחצית ראשונה 2026 מול מחצית ראשונה 2025</p></div><div class="insight-layout reveal d2"><div class="insight-hero"><div class="insight-platform" dir="ltr">Facebook</div><div class="insight-percent" dir="ltr">+39%</div><h3>במעורבות בתוכן</h3><p>מ־15.7 אלף ל־21.9 אלף אינטראקציות</p></div><div class="insight-data"><table><thead><tr><th>מדד</th><th>2025</th><th>2026</th><th>שיפור</th></tr></thead><tbody><tr><th>מעורבות בתוכן</th><td>15.7K</td><td class="current">21.9K</td><td class="growth">+39%</td></tr><tr><th>קליקים לקישור</th><td>99.4K</td><td class="current">133.8K</td><td class="growth">+35%</td></tr><tr><th>ביקורים בעמוד</th><td>47.5K</td><td class="current">58.5K</td><td class="growth">+23%</td></tr><tr><th>עוקבים חדשים</th><td>601</td><td class="current">751</td><td class="growth">+25%</td></tr></tbody></table></div></div><div class="insight-summary reveal d3"><b>6.2 אלף אינטראקציות נוספות בתוכן</b>, לצד כ־11 אלף ביקורים נוספים בעמוד ו־150 עוקבים חדשים יותר מבמחצית המקבילה.</div><p class="insight-source">מקור: Meta Business Suite, נתוני העמודים, ינואר–יוני 2025 ו־2026. מוצגים מדדים נבחרים שהשתפרו.<br>השינויים חושבו מהערכים המעוגלים בצילומים. בצילומים אין הפרדה בין פעילות אורגנית לממומנת.</p></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 16 מתוך 32">16 / 32</span></section>
+
+<section class="slide dark insights-added" id="instagram-highlights" data-dot="Instagram · הישגים"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><div class="eyebrow reveal">ביצועי העמודים · Instagram · הישגים בולטים</div><h2 class="reveal d1"><span class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Instagram"><defs><linearGradient id="ig-logo-gradient" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#FFDC80"/><stop offset=".3" stop-color="#F77737"/><stop offset=".6" stop-color="#E1306C"/><stop offset="1" stop-color="#833AB4"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#ig-logo-gradient)"/><rect x="10" y="10" width="28" height="28" rx="8" fill="none" stroke="white" stroke-width="3"/><circle cx="24" cy="24" r="7" fill="none" stroke="white" stroke-width="3"/><circle cx="33" cy="15" r="2" fill="white"/></svg></span><span>יותר חשיפה, יותר קליקים לקישור</span></h2><p class="reveal d2">מחצית ראשונה 2026 מול מחצית ראשונה 2025</p></div><div class="insight-layout reveal d2"><div class="insight-hero"><div class="insight-platform" dir="ltr">Instagram</div><div class="insight-percent" dir="ltr">+48%</div><h3>בקליקים לקישור</h3><p>מ־39.3 אלף ל־58.1 אלף קליקים</p></div><div class="insight-data"><table><thead><tr><th>מדד</th><th>2025</th><th>2026</th><th>שיפור</th></tr></thead><tbody><tr><th>קליקים לקישור</th><td>39.3K</td><td class="current">58.1K</td><td class="growth">+48%</td></tr><tr><th>חשבונות שנחשפו · Reach</th><td>1.4M</td><td class="current">1.6M</td><td class="growth">+14%</td></tr></tbody></table></div></div><div class="insight-summary reveal d3"><b>כ־18.8 אלף קליקים נוספים לקישור</b> במחצית הראשונה, לצד גידול של כ־200 אלף בחשיפה לחשבונות.</div><p class="insight-source">מקור: Meta Business Suite, נתוני העמודים, ינואר–יוני 2025 ו־2026. מוצגים מדדים נבחרים שהשתפרו.<br>השינויים חושבו מהערכים המעוגלים בצילומים. בצילומים אין הפרדה בין פעילות אורגנית לממומנת.</p></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 17 מתוך 32">17 / 32</span></section>
+
+<section class="slide dark insights-added" id="organic-growth" data-dot="צפיות וידאו אורגניות"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><div class="eyebrow reveal">סיכום ההישגים · ינואר–יוני 2026 מול 2025</div><h2 class="reveal d1"><span class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Facebook"><circle cx="24" cy="24" r="24" fill="#1877F2"/><path fill="white" d="M27.5 48V29.4h6.3l.95-7.3H27.5v-4.65c0-2.1.59-3.55 3.63-3.55H35V7.37c-.67-.09-2.97-.28-5.65-.28-5.59 0-9.42 3.41-9.42 9.68v5.33H13.6v7.3h6.33V48z"/></svg></span><span>הצפייה האורגנית בפייסבוק צמחה</span></h2><p class="reveal d2">יותר צפיות בתוכן, עם עלייה בולטת בצפיות וידאו של 3 שניות.</p></div><div class="insight-layout reveal d2"><div class="insight-hero"><div class="insight-platform">צפיות וידאו אורגניות</div><div class="insight-percent" dir="ltr">×2.5</div><h3>צפיות וידאו אורגניות</h3></div><div class="insight-data"><table><thead><tr><th>מדד</th><th>2025</th><th>2026</th><th>שיפור</th></tr></thead><tbody><tr><th>צפיות אורגניות בפייסבוק</th><td>226,395</td><td class="current">297,058</td><td class="growth">+31%</td></tr><tr><th>צפיות וידאו אורגניות · 3 שניות</th><td>19,268</td><td class="current">48,307</td><td class="growth">+151%</td></tr></tbody></table></div></div><div class="insight-summary reveal d3"><b class="instagram-inline"><span class="platform-logo platform-logo-small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Instagram"><defs><linearGradient id="ig-logo-gradient" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#FFDC80"/><stop offset=".3" stop-color="#F77737"/><stop offset=".6" stop-color="#E1306C"/><stop offset="1" stop-color="#833AB4"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#ig-logo-gradient)"/><rect x="10" y="10" width="28" height="28" rx="8" fill="none" stroke="white" stroke-width="3"/><circle cx="24" cy="24" r="7" fill="none" stroke="white" stroke-width="3"/><circle cx="33" cy="15" r="2" fill="white"/></svg></span>גם באינסטגרם: 532,740 צפיות אורגניות במחצית 2026.</b> נתון זה מוצג כהישג תקופתי, ללא השוואה ל־2025 בשל בסיס השוואה לא מהימן.</div><p class="insight-source">מקור: Meta Business Suite, Content overview, פירוט From organic. צפיות וידאו הן מדד נפרד ואין לחבר אותן לסך הצפיות.<br>מוצגים הישגים נבחרים. השינויים חושבו בין המחציות המקבילות, ועוגלו לאחוזים שלמים.</p></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 18 מתוך 32">18 / 32</span></section>
+
+<section class="slide dark insights-added" id="content-impact" data-dot="זמן צפייה מצטבר"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><div class="eyebrow reveal">סיכום ההישגים · ינואר–יוני 2026 מול 2025</div><h2 class="reveal d1"><span class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Facebook"><circle cx="24" cy="24" r="24" fill="#1877F2"/><path fill="white" d="M27.5 48V29.4h6.3l.95-7.3H27.5v-4.65c0-2.1.59-3.55 3.63-3.55H35V7.37c-.67-.09-2.97-.28-5.65-.28-5.59 0-9.42 3.41-9.42 9.68v5.33H13.6v7.3h6.33V48z"/></svg></span><span>יותר צפייה, יותר מעורבות מעבר לעוקבים</span></h2><p class="reveal d2">ביצועי התוכן בפייסבוק, הכוללים פעילות אורגנית וממומנת.</p></div><div class="insight-layout reveal d2"><div class="insight-hero"><div class="insight-platform">זמן צפייה מצטבר</div><div class="insight-percent" dir="ltr">+61%</div><h3>זמן צפייה מצטבר</h3></div><div class="insight-data"><table><thead><tr><th>מדד</th><th>2025</th><th>2026</th><th>שיפור</th></tr></thead><tbody><tr><th>זמן צפייה מצטבר</th><td>85d 18h</td><td class="current">138d 1h</td><td class="growth">+61%</td></tr><tr><th>אינטראקציות בתוכן</th><td>15,732</td><td class="current">21,912</td><td class="growth">+39%</td></tr><tr><th>אינטראקציות מלא־עוקבים</th><td>12,994</td><td class="current">18,280</td><td class="growth">+41%</td></tr><tr><th>צפיות וידאו ממודעות · 3 שניות</th><td>445,256</td><td class="current">779,798</td><td class="growth">+75%</td></tr></tbody></table></div></div><div class="insight-summary reveal d3"><b>הפעילות חיזקה את צריכת התוכן ואת המעורבות.</b> לצד הצמיחה האורגנית, גם צפיות הווידאו ממודעות והאינטראקציות של קהל שאינו עוקב עלו.</div><p class="insight-source">מקור: Meta Business Suite, Content overview, Facebook. חלוקת עוקבים / לא־עוקבים אינה הפרדה בין אורגני לממומן.<br>מוצגים הישגים נבחרים. השינויים חושבו בין המחציות המקבילות, ועוגלו לאחוזים שלמים.</p></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 19 מתוך 32">19 / 32</span></section>
+
+<section class="slide dark" id="guest-comments" data-dot="תגובות מפרגנות"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><div class="eyebrow reveal">הקולות שמאחורי המספרים</div><h2 class="reveal d1">״אין על המלונות של אסטרל״</h2><p class="reveal d2">אוכל, אירוח והמלצות חמות — מבחר תגובות מתוך פעילות הסושיאל של אסטרל.</p></div><div class="guest-wall"><div class="guest-column"><figure class="guest-comment"><img src="media/028822c4b6.png" alt="אין על המלונות של אסטרל" /></figure><figure class="guest-comment"><img src="media/9ceccc453a.png" alt="המלצה חמה על רשת מלונות אסטרל" /></figure><figure class="guest-comment"><img src="media/40db054134.png" alt="אחלה רשת מלונות אסטרל" /></figure></div><div class="guest-column guest-column-center"><figure class="guest-comment"><img src="media/c6b4ba9356.png" alt="המלצה על חוויה כיפית, טעימה ונעימה" /></figure><figure class="guest-comment"><img src="media/7cb5453b65.png" alt="המלון הכי טוב באילת והאוכל וואו" /></figure><figure class="guest-comment"><img src="media/3114b1bde9.png" alt="המלצה על הרשת והניהול" /></figure></div><div class="guest-column"><figure class="guest-comment"><img src="media/b5b27790b3.png" alt="מלון מומלץ" /></figure><figure class="guest-comment"><img src="media/a7fb93fb88.png" alt="אחלה מלון, מומלץ" /></figure><figure class="guest-comment"><img src="media/4796dd6206.png" alt="אחלה אסטרל" /></figure></div></div><div class="guest-closing reveal d3">החוויה של אסטרל, <b>במילים של הקהל.</b></div><div class="guest-source">תגובות נבחרות מפייסבוק ומאינסטגרם, מתוך צילומי המסך שסופקו.</div></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 20 מתוך 32">20 / 32</span></section>
+
+<section class="slide dark" id="couple-activity" data-dot="מטרילים את הבן זוג"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><div class="eyebrow reveal">פעילות קהל · הקריאייטיב והתגובות</div><h2 class="reveal d1">פעילות מטרילים את הבן זוג</h2><p class="reveal d2">״מאמי, קיבלתי חופשה זוגית במתנה!״ — המשתתפות לקחו את הרעיון לשיחות שלהן ושיתפו בתגובות.</p></div><div class="couple-layout reveal d2"><div class="couple-side couple-pair"><button class="couple-photo" type="button" aria-label="הגדלת שיחת וואטסאפ 1"><img src="media/411f75efba.jpg" alt="שיחת וואטסאפ בעקבות הפעילות 1"></button><button class="couple-photo" type="button" aria-label="הגדלת שיחת וואטסאפ 2"><img src="media/e90e10953e.jpg" alt="שיחת וואטסאפ בעקבות הפעילות 2"></button></div><figure class="couple-main"><button class="couple-photo" type="button" aria-label="הגדלת הקריאייטיב מאמי קיבלתי חופשה זוגית במתנה"><img src="media/4b3bc1ef63.jpg" alt="הקריאייטיב מאמי קיבלתי חופשה זוגית במתנה"></button><figcaption>הפוסט שהזמין להשתתף</figcaption></figure><div class="couple-side couple-single"><button class="couple-photo" type="button" aria-label="הגדלת שיחת וואטסאפ 3"><img src="media/656fbbac90.jpg" alt="שיחת וואטסאפ בעקבות הפעילות 3"></button></div></div><div class="couple-footer">רעיון משחקי שהקהל לקח חלק בו <span>לחיצה על צילום פותחת אותו להגדלה</span></div></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 21 מתוך 32">21 / 32</span></section>
+
+<section class="slide dark" id="obm-events" data-dot="OBM · אירועים ידועים מראש"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><h2 class="reveal d1"><bdi>OBM</bdi> - שיווק יזום ומתוזמן מראש</h2></div><div class="obm-gallery reveal d2"><figure><button class="couple-photo" type="button" aria-label="הגדלת קריאייטיב לג בעומר"><img src="media/c3937412f4.png" alt="קריאייטיב אסטרל ללג בעומר — בחורה לצד הבריכה"></button><figcaption>ל״ג בעומר</figcaption></figure><figure><button class="couple-photo" type="button" aria-label="הגדלת קריאייטיב חודש הגאווה"><img src="media/3fc073d1f4.png" alt="קריאייטיב אסטרל לחודש הגאווה — מלון ודגל הגאווה"></button><figcaption>חודש הגאווה</figcaption></figure></div></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 22 מתוך 32">22 / 32</span></section>
+<section class="slide dark" id="rtm-events" data-dot="RTM · אירועים בזמן אמת"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><h2 class="reveal d1"><bdi>RTM</bdi> - שיווק מבוסס טריגרים ואירועים בזמן אמת</h2></div><div class="rtm-gallery reveal d2"><button type="button" class="couple-photo" aria-label="הגדלת קריאייטיב RTM 1"><img src="media/b13c216f42.jpg" alt="קריאייטיב RTM של אסטרל 1"></button><button type="button" class="couple-photo" aria-label="הגדלת קריאייטיב RTM 2"><img src="media/d40ee106d1.png" alt="קריאייטיב RTM של אסטרל 2"></button><button type="button" class="couple-photo" aria-label="הגדלת קריאייטיב RTM 3"><img src="media/4621d15cb9.png" alt="קריאייטיב RTM של אסטרל 3"></button></div></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 23 מתוך 32">23 / 32</span></section>
+<section class="slide dark" id="post-examples" data-dot="דוגמאות לפוסטים"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><div class="wrap"><div class="shead"><h2 class="reveal d1">דוגמאות לפוסטים</h2></div><div class="post-gallery reveal d2"><button type="button" class="couple-photo" aria-label="הגדלת דוגמה לפוסט 1"><img src="media/36dab8c98d.png" alt="דוגמה לפוסט אסטרל 1"></button><button type="button" class="couple-photo" aria-label="הגדלת דוגמה לפוסט 2"><img src="media/d5abf80b24.png" alt="דוגמה לפוסט אסטרל 2"></button></div></div><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 24 מתוך 32">24 / 32</span></section>
+<section class="slide dark" id="social-summary" data-dot="לסיכום"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><h2>לסיכום</h2><p class="summary-intro">אנחנו רואים שהשינוי באסטרטגיית התוכן היה נכון לנו.</p><h3>מה עכשיו?</h3><ol><li><span class="summary-index">1.</span><p>ממשיכים ליצור תוכן סביב המלונות, דגש על סרטוני ביוטי שעושים חשק לחופשה.</p></li><li><span class="summary-index">2.</span><p>תוכן פודי מהמלונות - יותר קינוחים ומנות מיוחדות בפרונט.</p></li><li><span class="summary-index">3.</span><p>עוקבים באינסטגרם - הגיע הזמן להכפיל ולשלש את המספרים!</p></li></ol></div><span class="slide-page-number" aria-label="שקף 25 מתוך 32">25 / 32</span></section><section class="slide sand" id="employee-page-intro" data-dot="ומה קורה ב Astral HR?"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><div class="employee-question">ומה קורה ב <strong><bdi dir="ltr">Astral HR</bdi><span dir="rtl">?</span></strong></div><span class="slide-page-number" aria-label="שקף 26 מתוך 32">26 / 32</span></section>
+<section class="slide sand hr-report hr-horizontal" id="hr-leads" data-dot="טראפיק"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="hr-kicker">ASTRAL HR · גיוס עובדים · ינואר–אוגוסט 2026</div><h2>טראפיק</h2><p class="hr-sub">סיכום הפעילות</p><div class="hr-table"><table><thead><tr><th>הוצאה (₪)</th><th>תוצאה (כמות)</th><th>עלות לתוצאה (₪)</th><th>חשיפות</th><th>קליקים</th><th>CTR</th><th>REACH</th><th>CPM (₪)</th><th>לינק קליק</th></tr></thead><tbody><tr><td dir="ltr">13,043</td><td dir="ltr">52,386<small>הקלקות על קישור</small></td><td dir="ltr">0.25</td><td dir="ltr">3,608,645</td><td dir="ltr">51,924</td><td dir="ltr">1.44%</td><td dir="ltr">921,388</td><td dir="ltr">3.61</td><td dir="ltr">52,386</td></tr></tbody></table></div><p class="hr-note">תוצאה: הקלקות על קישור. נתוני הסיכום מתוך צילום המסך של קמפייני הטראפיק.<br>הוצאה, חשיפות, קליקים, CTR, Reach, CPM ולינק קליק: שורת הסיכום בצילום Meta. קליקים ו־CTR מתייחסים ל־All.<br>מקור: צילומי המסך שסופקו ודוח Astral HR לתקופה 01.01–31.08.2026.</p></div><span class="slide-page-number" aria-label="שקף 27 מתוך 32">27 / 32</span></section><section class="slide sand hr-report hr-horizontal" id="hr-whatsapp" data-dot="המרות לוואטסאפ"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="hr-kicker">ASTRAL HR · גיוס עובדים · ינואר–אוגוסט 2026</div><h2>המרות לוואטסאפ</h2><p class="hr-sub">סיכום הפעילות</p><div class="hr-table"><table><thead><tr><th>הוצאה (₪)</th><th>תוצאה (כמות)</th><th>עלות לתוצאה (₪)</th><th>חשיפות</th><th>קליקים</th><th>CTR</th><th>REACH</th><th>CPM (₪)</th><th>לינק קליק</th></tr></thead><tbody><tr><td dir="ltr">28,288</td><td dir="ltr">3,421<small>שיחות שהתחילו</small></td><td dir="ltr">8.27</td><td dir="ltr">800,292</td><td dir="ltr">25,004</td><td dir="ltr">3.12%</td><td dir="ltr">205,436</td><td dir="ltr">35.35</td><td dir="ltr">9,139</td></tr></tbody></table></div><p class="hr-note">מקור: שורת הסיכום בצילום Meta המעודכן · 33 קמפיינים · 01.01–31.08.2026.<br>תוצאה: שיחות שהתחילו. קליקים ו־CTR מתייחסים ל־All.</p></div><span class="slide-page-number" aria-label="שקף 28 מתוך 32">28 / 32</span></section><section class="slide sand hr-report hr-horizontal" id="hr-engagement" data-dot="מעורבות"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="hr-kicker">ASTRAL HR · גיוס עובדים · ינואר–אוגוסט 2026</div><h2>מעורבות</h2><p class="hr-sub">סיכום הפעילות</p><div class="hr-table"><table><thead><tr><th>הוצאה (₪)</th><th>תוצאה (כמות)</th><th>עלות לתוצאה (₪)</th><th>חשיפות</th><th>קליקים</th><th>CTR</th><th>REACH</th><th>CPM (₪)</th><th>לינק קליק</th></tr></thead><tbody><tr><td dir="ltr">15,229</td><td dir="ltr">594,994<small>מעורבויות</small></td><td dir="ltr">0.026<small>למעורבות</small></td><td dir="ltr">1,334,453</td><td dir="ltr">13,637</td><td dir="ltr">1.02%</td><td dir="ltr">574,135</td><td dir="ltr">11.41</td><td dir="ltr">1,127</td></tr></tbody></table></div><p class="hr-note">כמות התוצאות מאחדת Post engagement ו־Post interaction gross בהתאם להבהרת הלקוח על שינוי שם המדד במטא.<br>594,994 תוצאות לפי הסינון באקסל; העלות לתוצאה חושבה מההוצאה הכוללת חלקי כמות התוצאות.<br>יתר המדדים: שורת הסיכום בצילום Meta · 01.01–31.08.2026. קליקים ו־CTR מתייחסים ל־All.</p></div><span class="slide-page-number" aria-label="שקף 29 מתוך 32">29 / 32</span></section><section class="slide sand" id="hr-creatives" data-dot="ועכשו קצת קריאייטיבים"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="shead"><h2>ועכשו קצת קריאייטיבים</h2></div><div class="vrow"><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 1"><source src="media/10a94a3eff.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 1">▶</button></div><figcaption class="hr-creative-label">גיוס</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 2"><source src="media/ad9385e3a1.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 2">▶</button></div><figcaption class="hr-creative-label">גיוס</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 3"><source src="media/6b63058b0a.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 3">▶</button></div><figcaption class="hr-creative-label">וייבים של אילת</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 4"><source src="media/2aaef654c4.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 4">▶</button></div><figcaption class="hr-creative-label">משפחה</figcaption></figure></div></div><span class="slide-page-number" aria-label="שקף 30 מתוך 32">30 / 32</span></section><section class="slide sand" id="hr-ambassadors" data-dot="סרטוני שגרירים"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="shead"><h2>סרטוני שגרירים</h2></div><div class="vrow"><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון שגרירים 1"><source src="media/c1db1c2352.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון שגרירים 1">▶</button></div><figcaption class="ambassador-caption">מרגיש לי שזה שלושתם</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון שגרירים 2"><source src="media/a551ba26f3.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון שגרירים 2">▶</button></div><figcaption class="ambassador-caption">קצת ג'וס במשמרת</figcaption></figure></div></div><span class="slide-page-number" aria-label="שקף 31 מתוך 32">31 / 32</span></section><section class="slide sand" id="partnership-close" data-dot="שקף תודה!"><img class="closing-exact-reference" src="media/23f47ebccc.png" alt="לוגו אסטרל משמאל, כוכב במרכז ולוגו ארבעים ושתיים מימין. מתחתיהם: שקף תודה!"><span class="slide-page-number" aria-label="שקף 32 מתוך 32">32 / 32</span></section>
+</div>
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  // dots
+  const dots=document.getElementById('dots');
+  slides.forEach((s,idx)=>{
+    const b=document.createElement('button');
+    if(s.classList.contains('sand'))b.classList.add('dk');
+    b.title=s.dataset.dot||('שקף '+(idx+1));
+    b.onclick=()=>s.scrollIntoView({behavior:'smooth'});
+    dots.appendChild(b);
+  });
+  const dotBtns=[...dots.children];
+  // reveal + progress + active dot
+  const io=new IntersectionObserver((ents)=>{
+    ents.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.reveal').forEach(r=>r.classList.add('in'));
+        const i=slides.indexOf(e.target);
+        dotBtns.forEach((d,x)=>d.classList.toggle('on',x===i));
+      }
+    });
+  },{threshold:.55});
+  slides.forEach(s=>io.observe(s));
+  deck.addEventListener('scroll',()=>{
+    const p=deck.scrollTop/(deck.scrollHeight-deck.clientHeight);
+    document.getElementById('bar').style.width=(p*100)+'%';
+  });
+  // keyboard
+  window.addEventListener('keydown',e=>{
+    const i=Math.round(deck.scrollTop/window.innerHeight);
+    if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();slides[Math.min(i+1,slides.length-1)].scrollIntoView({behavior:'smooth'})}
+    if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();slides[Math.max(i-1,0)].scrollIntoView({behavior:'smooth'})}
+  });
+
+  // embedded data:video sources don't play reliably in browsers — convert to blob URLs
+  document.querySelectorAll('.vcard video').forEach(v=>{
+    const s=v.querySelector('source');
+    const src=s?s.getAttribute('src'):null;
+    if(src && src.indexOf('data:')===0){
+      fetch(src).then(r=>r.blob()).then(blob=>{
+        const url=URL.createObjectURL(blob);
+        if(s.parentNode) s.parentNode.removeChild(s);
+        v.src=url; v.load();
+      }).catch(()=>{});
+    }
+  });
+  // video play buttons
+  document.querySelectorAll('.vcard').forEach(c=>{
+    const f=c.querySelector('.vframe'), v=c.querySelector('video'), b=c.querySelector('.playbtn');
+    if(!f||!v||!b) return;
+    b.addEventListener('click',()=>{ const p=v.play(); if(p&&p.catch)p.catch(()=>{}); });
+    v.addEventListener('play',()=>f.classList.add('playing'));
+    v.addEventListener('pause',()=>f.classList.remove('playing'));
+    v.addEventListener('ended',()=>f.classList.remove('playing'));
+  });
+</script>
+<dialog class="couple-dialog"><button class="couple-close" aria-label="סגירה">✕</button><img alt=""></dialog><script>const coupleDialog=document.querySelector('.couple-dialog');document.querySelectorAll('.couple-photo').forEach(b=>b.addEventListener('click',()=>{const im=b.querySelector('img');const full=coupleDialog.querySelector('img');full.src=im.src;full.alt=im.alt;coupleDialog.showModal()}));coupleDialog.querySelector('button').onclick=()=>coupleDialog.close();coupleDialog.addEventListener('click',e=>{if(e.target===coupleDialog)coupleDialog.close()});</script><script>(()=>{const s=document.getElementById('journey-bridge');s.dataset.step='0';const advance=()=>{s.dataset.step=String(Math.min(2,Number(s.dataset.step)+1))};s.addEventListener('click',advance);window.addEventListener('keydown',e=>{const r=s.getBoundingClientRect();if(r.top < innerHeight*.4 && r.bottom > innerHeight*.6 && ['ArrowDown','PageDown',' ','Enter','ArrowRight'].includes(e.key)&&Number(s.dataset.step)<2){e.preventDefault();e.stopImmediatePropagation();advance()}},true)})();</script><script>(()=>{const hero=document.getElementById('hero');const watch=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){hero.classList.add('star-started');watch.disconnect()}},{threshold:.55});watch.observe(hero)})();</script><script>(()=>{const slide=document.getElementById('guest-comments');const columns=[...slide.querySelectorAll('.guest-column')];for(let row=0;row<3;row++)columns.forEach((col,i)=>{const card=col.children[row];if(card)card.style.setProperty('--dm-delay',(0.25+(row*3+i)*.23)+'s')});const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const cards=[...slide.querySelectorAll('.guest-comment')];for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]]}cards.forEach((card,i)=>card.style.setProperty('--dm-delay',(0.25+i*.23)+'s'));slide.classList.add('dm-entered')}else slide.classList.remove('dm-entered')})},{threshold:.5});observer.observe(slide)})();</script><script>(()=>{const s=document.getElementById('paid-key-metrics');const els=[...s.querySelectorAll('.count-value')];const fmt=(n,d)=>n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});let ran=false;new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting||ran)continue;ran=true;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const start=performance.now();function tick(t){let p=Math.min((t-start)/1100,1),ease=1-Math.pow(1-p,3);els.forEach(el=>el.textContent=fmt(Number(el.dataset.target)*ease,Number(el.dataset.decimals)));if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)}},{threshold:.55}).observe(s)})();</script><script>document.querySelectorAll("#hr-creatives video").forEach(v=>v.addEventListener("loadedmetadata",()=>{if(v.currentTime===0)v.currentTime=.1},{once:true}));</script><script>document.querySelectorAll("#hr-ambassadors video").forEach(v=>v.addEventListener("loadedmetadata",()=>{if(v.currentTime===0)v.currentTime=.1},{once:true}));</script></body>
+</html>
