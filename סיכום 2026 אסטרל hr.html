@@ -433,19 +433,46 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
   .hrx .ft-head,.hrx .ft-row{grid-template-columns:1fr 30px 1.2fr}
 }
 </style>
+<style>
+/* ===== HR · actions + organic table ===== */
+.hrx .cards.cards-6{grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.hrx .cards-6 .card{padding:22px 22px 24px}
+.hrx .cards-6 .card h3{font-size:19px;margin:10px 0 8px}
+.hrx .cards-6 .card p{font-size:14.5px}
+#hr-organic .lead{max-width:900px}
+.hrx .org-t{width:100%;margin-top:28px;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #e6dfcf;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(11,22,34,.06)}
+.hrx .org-t thead th{font-size:13px;font-weight:700;color:#7C90A2;padding:14px 22px;text-align:center;background:#faf7f0;border-bottom:1px solid #e6dfcf}
+.hrx .org-t thead th:first-child{text-align:right}
+.hrx .org-t tbody th{text-align:right;font-size:17px;font-weight:700;color:#0b1622;padding:14px 22px;border-top:1px solid #efe9dc}
+.hrx .org-t tbody th small{display:block;font-size:12px;font-weight:400;color:#7C90A2;margin-top:2px}
+.hrx .org-t td{text-align:center;padding:14px 22px;border-top:1px solid #efe9dc;unicode-bidi:plaintext;white-space:nowrap}
+.hrx .org-t tbody tr:first-child th,.hrx .org-t tbody tr:first-child td{border-top:0}
+.hrx .org-t .y25{font-size:17px;color:#7C90A2}
+.hrx .org-t .y26{font-size:21px;font-weight:800;color:#0b1622}
+.hrx .org-t .chg{display:inline-block;font-weight:700;font-size:14px;color:#95743b;background:rgba(201,168,106,.15);border:1px solid rgba(201,168,106,.45);border-radius:100px;padding:4px 12px}
+.hrx .org-t tr.hl{background:rgba(201,168,106,.10)}
+.hrx .org-t tr.hl .y26{color:#95743b}
+.hrx .org-src{margin-top:12px;font-size:12px;color:#7C90A2}
+@media(max-width:768px){
+  .hrx .cards.cards-6{grid-template-columns:1fr}
+  .hrx .org-t thead th,.hrx .org-t tbody th,.hrx .org-t td{padding:10px 8px}
+  .hrx .org-t tbody th{font-size:14px}
+  .hrx .org-t .y26{font-size:16px}
+}
+</style>
 </head>
 <body>
 <div id="bar"></div>
 <div id="dots"></div>
 <div class="deck" id="deck">
 <!-- ===== COVER ===== -->
-  <section class="slide dark co-brand-slide" id="partnership-open" data-dot="אסטרל וארבעים ושתיים"><div class="co-brand-inner"><div class="co-brand-row reveal d1"><div class="co-logo"><img class="co-astral" src="media/aef607b7d4.png" alt="Astral Hotels"></div><svg class="co-star" viewBox="0 0 256 236" aria-hidden="true"><path fill="currentColor" d="M128 0 C108 56 75 90 0 118 C73 144 108 181 128 236 C151 178 189 143 256 118 C184 91 151 55 128 0Z"/></svg><div class="co-logo"><img class="co-agency" src="media/e6960922f8.svg" alt="ארבעים ושתיים — סושיאל, דיגיטל, קריאייטיב"></div></div></div><span class="slide-page-number" aria-label="שקף 1 מתוך 11">1 / 11</span></section>
+  <section class="slide dark co-brand-slide" id="partnership-open" data-dot="אסטרל וארבעים ושתיים"><div class="co-brand-inner"><div class="co-brand-row reveal d1"><div class="co-logo"><img class="co-astral" src="media/aef607b7d4.png" alt="Astral Hotels"></div><svg class="co-star" viewBox="0 0 256 236" aria-hidden="true"><path fill="currentColor" d="M128 0 C108 56 75 90 0 118 C73 144 108 181 128 236 C151 178 189 143 256 118 C184 91 151 55 128 0Z"/></svg><div class="co-logo"><img class="co-agency" src="media/e6960922f8.svg" alt="ארבעים ושתיים — סושיאל, דיגיטל, קריאייטיב"></div></div></div><span class="slide-page-number" aria-label="שקף 1 מתוך 13">1 / 13</span></section>
 
 <section class="slide dark" id="hero" data-dot="שער"><div class="astral-star-trace" aria-hidden="true"><div class="star-position"><div class="star-rotor"><svg class="star-face star-outline" viewBox="-12 -12 280 260"><path pathLength="1000" d="M128 0 C108 56 75 90 0 118 C73 144 108 181 128 236 C151 178 189 143 256 118 C184 91 151 55 128 0 Z"/></svg><svg class="star-face star-white" viewBox="-12 -12 280 260"><path d="M128 0 C108 56 75 90 0 118 C73 144 108 181 128 236 C151 178 189 143 256 118 C184 91 151 55 128 0 Z"/></svg></div></div></div>
     <div class="glowline"></div>
     <img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels">
     <div class="hero-inner wrap hero-refined"><div class="hero-period">סיכום שנה · ינואר–אוקטובר 2026</div><h1><span class="hero-title-line">שנה של שינוי אסטרטגי</span><span class="hero-subtitle-line">Astral HR · מגייסים לעבודה, בונים בית</span></h1></div><div class="hero-bottom-period">ינואר–אוקטובר 2026 · מצגת לסיכום שנה</div>
-  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 2 מתוך 11">2 / 11</span></section>
+  <img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><span class="slide-page-number" aria-label="שקף 2 מתוך 13">2 / 13</span></section>
 
 <section class="slide sand hrx" id="hr-problem" data-dot="האתגר · סוף 2024"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
 <div class="kick reveal">נקודת הפתיחה · סוף 2024</div>
@@ -457,7 +484,7 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
 <article class="card reveal d4"><span class="n">03</span><h3>שימור הוא הבעיה האמיתית</h3><p>כל עזיבה מחזירה את הגיוס לנקודת אפס — ועולה לרשת בזמן, בכסף ובאיכות השירות.</p></article>
 </div>
 <p class="strip reveal d5">המטרה שלנו הייתה ברורה: <b>לבנות לעובדים סיבה להישאר.</b></p>
-</div><span class="slide-page-number" aria-label="שקף 3 מתוך 11">3 / 11</span></section>
+</div><span class="slide-page-number" aria-label="שקף 3 מתוך 13">3 / 13</span></section>
 
 <section class="slide dark hrx hrx-dark" id="hr-shift" data-dot="השינוי האסטרטגי"><img class="brand" src="media/aef607b7d4.png" alt="Astral Hotels"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
 <div class="kick reveal">השינוי האסטרטגי</div>
@@ -470,7 +497,7 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
 <div class="ft-row reveal d5"><span class="old">עבודה במלון</span><span class="ar">←</span><span class="new">שייכות לרשת אחת גדולה</span></div>
 <div class="ft-row reveal d6"><span class="old">גיוס חד־פעמי</span><span class="ar">←</span><span class="new">מותג מעסיק שעובד כל השנה</span></div>
 </div>
-</div><span class="slide-page-number" aria-label="שקף 4 מתוך 11">4 / 11</span></section>
+</div><span class="slide-page-number" aria-label="שקף 4 מתוך 13">4 / 13</span></section>
 
 <section class="slide sand hrx" id="hr-pillars" data-dot="שלושת עמודי התוכן"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
 <div class="kick reveal">איך עשינו את זה</div>
@@ -480,18 +507,36 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
 <article class="card reveal d3"><span class="n">02</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4v-6H4zM10 20h4V9h-4zM16 20h4V4h-4z"/></svg></div><h3>קידום ברשת</h3><p>דיברנו הרבה ובקול על מסלולי ההתקדמות באסטרל: אפשר להתחיל מלמטה ולהגיע רחוק.</p></article>
 <article class="card reveal d4"><span class="n">03</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></div><h3>הוכחות מהשטח</h3><p>לא הבטחות — סיפורים אמיתיים של עשרות עובדים שהתחילו בתפקידים זוטרים ומכהנים היום בתפקידים בכירים.</p></article>
 </div>
-</div><span class="slide-page-number" aria-label="שקף 5 מתוך 11">5 / 11</span></section>
+</div><span class="slide-page-number" aria-label="שקף 5 מתוך 13">5 / 13</span></section>
+
+<section class="slide sand hrx" id="hr-actions" data-dot="מה עשינו"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
+<div class="kick reveal">מאז 2024</div>
+<h2 class="reveal d1">העובדים במרכז, בכל פוסט</h2>
+<p class="lead reveal d2">המטרה הייתה לחבר את העובדים רגשית לרשת. אז שמנו אותם בפרונט, וחגגנו אותם בכל הזדמנות.</p>
+<div class="cards cards-6"><article class="card reveal d2"><span class="n">01</span><h3>העובדים מול המצלמה</h3><p>רילס שבהם עובדים מכל המחלקות הם הכוכבים: מצלמה נסתרת, טרנדים והומור מהמשמרת.</p></article><article class="card reveal d3"><span class="n">02</span><h3>״הכוכבים של אסטרל״</h3><p>פינה קבועה שמכירה לקהל עובדים ומנהלים, כמו עדי פלד, מנהלת ההדרכה והרווחה של הרשת.</p></article><article class="card reveal d4"><span class="n">03</span><h3>סיפורי קידום אמיתיים</h3><p>ריטה שהתחילה כפקידת קבלה, רמי, גלינה שעלתה מקזחסטן. הוכחה שבאסטרל מתקדמים.</p></article><article class="card reveal d2"><span class="n">04</span><h3>נבחרת שגרירים</h3><p>סדנת וידאו לעובדים, שמצלמים ומספרים בעצמם איך זה לעבוד באסטרל.</p></article><article class="card reveal d3"><span class="n">05</span><h3>מרימים לעובדים</h3><p>מסיבת השנה, הרמות כוסית, ימי פינוק לצוותים והוקרה למנהלים המצטיינים של הרשת.</p></article><article class="card reveal d4"><span class="n">06</span><h3>גם המשפחות בתמונה</h3><p>הפנינג ל״ג בעומר, פורים וט״ו בשבט לילדי העובדים, ויום כיף לילדים שעולים לכיתה א׳.</p></article></div>
+</div><span class="slide-page-number" aria-label="שקף 6 מתוך 13">6 / 13</span></section>
 
 <section class="slide sand hrx" id="hr-stories" data-dot="מזוטר לבכיר"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
 <div class="kick reveal">הוכחות מהשטח</div>
 <h2 class="reveal d1">מזוטר לבכיר</h2>
 <p class="lead reveal d2">עשרות עובדים שהתחילו בתפקידים זוטרים — ומנהלים היום ברשת. אלה הסיפורים שהבאנו לפיד.</p>
 <div class="stories"><article class="story reveal d2"><div class="avatar ph-box">תמונה</div><h3><span class="ph">[שם העובד/ת]</span></h3><div class="path"><span class="from"><span class="ph">[תפקיד התחלתי]</span></span><span class="down">↓</span><span class="to"><span class="ph">[תפקיד היום]</span></span></div><div class="yrs"><span class="ph">[X שנים]</span> ברשת</div></article><article class="story reveal d3"><div class="avatar ph-box">תמונה</div><h3><span class="ph">[שם העובד/ת]</span></h3><div class="path"><span class="from"><span class="ph">[תפקיד התחלתי]</span></span><span class="down">↓</span><span class="to"><span class="ph">[תפקיד היום]</span></span></div><div class="yrs"><span class="ph">[X שנים]</span> ברשת</div></article><article class="story reveal d4"><div class="avatar ph-box">תמונה</div><h3><span class="ph">[שם העובד/ת]</span></h3><div class="path"><span class="from"><span class="ph">[תפקיד התחלתי]</span></span><span class="down">↓</span><span class="to"><span class="ph">[תפקיד היום]</span></span></div><div class="yrs"><span class="ph">[X שנים]</span> ברשת</div></article><article class="story reveal d5"><div class="avatar ph-box">תמונה</div><h3><span class="ph">[שם העובד/ת]</span></h3><div class="path"><span class="from"><span class="ph">[תפקיד התחלתי]</span></span><span class="down">↓</span><span class="to"><span class="ph">[תפקיד היום]</span></span></div><div class="yrs"><span class="ph">[X שנים]</span> ברשת</div></article></div>
-</div><span class="slide-page-number" aria-label="שקף 6 מתוך 11">6 / 11</span></section>
+</div><span class="slide-page-number" aria-label="שקף 7 מתוך 13">7 / 13</span></section>
 
-<section class="slide sand" id="hr-creatives" data-dot="הקריאייטיב בפיד"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="shead"><h2>הקריאייטיב שבולט בפיד</h2></div><div class="vrow"><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 1"><source src="media/10a94a3eff.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 1">▶</button></div><figcaption class="hr-creative-label">גיוס</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 2"><source src="media/ad9385e3a1.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 2">▶</button></div><figcaption class="hr-creative-label">גיוס</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 3"><source src="media/6b63058b0a.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 3">▶</button></div><figcaption class="hr-creative-label">וייבים של אילת</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 4"><source src="media/2aaef654c4.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 4">▶</button></div><figcaption class="hr-creative-label">משפחה</figcaption></figure></div></div><span class="slide-page-number" aria-label="שקף 7 מתוך 11">7 / 11</span></section>
+<section class="slide sand" id="hr-creatives" data-dot="הקריאייטיב בפיד"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="shead"><h2>הקריאייטיב שבולט בפיד</h2></div><div class="vrow"><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 1"><source src="media/10a94a3eff.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 1">▶</button></div><figcaption class="hr-creative-label">גיוס</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 2"><source src="media/ad9385e3a1.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 2">▶</button></div><figcaption class="hr-creative-label">גיוס</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 3"><source src="media/6b63058b0a.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 3">▶</button></div><figcaption class="hr-creative-label">וייבים של אילת</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון גיוס 4"><source src="media/2aaef654c4.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון 4">▶</button></div><figcaption class="hr-creative-label">משפחה</figcaption></figure></div></div><span class="slide-page-number" aria-label="שקף 8 מתוך 13">8 / 13</span></section>
 
-<section class="slide sand" id="hr-ambassadors" data-dot="סרטוני שגרירים"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="shead"><h2>סרטוני שגרירים</h2></div><div class="vrow"><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון שגרירים 1"><source src="media/c1db1c2352.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון שגרירים 1">▶</button></div><figcaption class="ambassador-caption">מרגיש לי שזה שלושתם</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון שגרירים 2"><source src="media/a551ba26f3.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון שגרירים 2">▶</button></div><figcaption class="ambassador-caption">קצת ג'וס במשמרת</figcaption></figure></div></div><span class="slide-page-number" aria-label="שקף 8 מתוך 11">8 / 11</span></section>
+<section class="slide sand" id="hr-ambassadors" data-dot="סרטוני שגרירים"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap"><div class="shead"><h2>סרטוני שגרירים</h2></div><div class="vrow"><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון שגרירים 1"><source src="media/c1db1c2352.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון שגרירים 1">▶</button></div><figcaption class="ambassador-caption">מרגיש לי שזה שלושתם</figcaption></figure><figure class="vcard"><div class="vframe"><video preload="metadata" playsinline controls aria-label="סרטון שגרירים 2"><source src="media/a551ba26f3.mp4" type="video/mp4"></video><button class="playbtn" aria-label="נגן סרטון שגרירים 2">▶</button></div><figcaption class="ambassador-caption">קצת ג'וס במשמרת</figcaption></figure></div></div><span class="slide-page-number" aria-label="שקף 9 מתוך 13">9 / 13</span></section>
+
+<section class="slide sand hrx" id="hr-organic" data-dot="התוצאה · אורגני"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
+<div class="kick reveal">התוצאה · יותר משנתיים אחרי</div>
+<h2 class="reveal d1">התוכן על העובדים עובד, גם בלי לשלם עליו</h2>
+<p class="lead reveal d2">ב־2026 הגענו כמעט לפי 5 אנשים בלי פרסום. הקהל מגיב פי 7.5 יותר, ומשתף את התוכן עם חברים פי 18 יותר. וכשעובד שולח סרטון לחבר, שם בדיוק נולד מועמד חדש.</p>
+<table class="org-t reveal d3">
+<thead><tr><th></th><th>ינואר–אוקטובר 2025</th><th>ינואר–אוקטובר 2026</th><th>שינוי</th></tr></thead>
+<tbody><tr class=""><th>אנשים שראו את התוכן בלי פרסום<small>Reach אורגני</small></th><td class="y25">33 אלף</td><td class="y26">163 אלף</td><td><span class="chg">פי 4.9</span></td></tr><tr class=""><th>צפיות בתוכן בלי פרסום<small>צפיות אורגניות</small></th><td class="y25">168 אלף</td><td class="y26">446 אלף</td><td><span class="chg">פי 2.6</span></td></tr><tr class=""><th>לייקים, תגובות, שיתופים ושמירות<small>אינטראקציות אורגניות</small></th><td class="y25">950</td><td class="y26">7,130</td><td><span class="chg">פי 7.5</span></td></tr><tr class="hl"><th>שיתופים של התוכן לחברים</th><td class="y25">178</td><td class="y26">3,242</td><td><span class="chg">פי 18</span></td></tr><tr class=""><th>עוקבים חדשים בזכות התוכן</th><td class="y25">57</td><td class="y26">150</td><td><span class="chg">פי 2.6</span></td></tr><tr class=""><th>שיעור מעורבות<small>אינטראקציות מתוך צפיות</small></th><td class="y25">0.56%</td><td class="y26">1.60%</td><td><span class="chg">פי 2.9</span></td></tr></tbody>
+</table>
+<p class="org-src reveal d4">מקור: Meta Business Suite · אינסטגרם · נתונים אורגניים בלבד, בלי קידום ממומן.</p>
+</div><span class="slide-page-number" aria-label="שקף 10 מתוך 13">10 / 13</span></section>
 
 <section class="slide sand hrx" id="hr-results" data-dot="התוצאה · גיוס"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
 <div class="kick reveal">התוצאה · ינואר–אוקטובר 2026</div>
@@ -504,7 +549,7 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
 <div class="mini reveal d5"><div class="mv"><span class="ph">[נתון שימור]</span></div><div class="ml">תחלופה / ותק ממוצע של עובדים</div></div>
 </div>
 </div>
-</div><span class="slide-page-number" aria-label="שקף 9 מתוך 11">9 / 11</span></section>
+</div><span class="slide-page-number" aria-label="שקף 11 מתוך 13">11 / 13</span></section>
 
 <section class="slide sand hrx" id="hr-next" data-dot="סיכום ומה הלאה"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
 <div class="kick reveal">לסיכום</div>
@@ -521,9 +566,9 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
 <li>למדוד יחד עם HR את ההשפעה על שימור העובדים</li>
 </ul></div>
 </div>
-</div><span class="slide-page-number" aria-label="שקף 10 מתוך 11">10 / 11</span></section>
+</div><span class="slide-page-number" aria-label="שקף 12 מתוך 13">12 / 13</span></section>
 
-<section class="slide sand" id="partnership-close" data-dot="שקף תודה!"><img class="closing-exact-reference" src="media/23f47ebccc.png" alt="לוגו אסטרל משמאל, כוכב במרכז ולוגו ארבעים ושתיים מימין. מתחתיהם: שקף תודה!"><span class="slide-page-number" aria-label="שקף 11 מתוך 11">11 / 11</span></section>
+<section class="slide sand" id="partnership-close" data-dot="שקף תודה!"><img class="closing-exact-reference" src="media/23f47ebccc.png" alt="לוגו אסטרל משמאל, כוכב במרכז ולוגו ארבעים ושתיים מימין. מתחתיהם: שקף תודה!"><span class="slide-page-number" aria-label="שקף 13 מתוך 13">13 / 13</span></section>
 </div>
 <script>
   const deck=document.getElementById('deck');
