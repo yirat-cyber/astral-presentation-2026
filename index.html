@@ -849,13 +849,14 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
   // reveal + progress + active dot
   const io=new IntersectionObserver((ents)=>{
     ents.forEach(e=>{
-      if(e.isIntersecting){
+      // tall slides (narrow screens) can never be 55% visible, so also accept 45% of the viewport filled
+      if(e.isIntersecting&&(e.intersectionRatio>=.55||e.intersectionRect.height>=window.innerHeight*.45)){
         e.target.querySelectorAll('.reveal').forEach(r=>r.classList.add('in'));
         const i=slides.indexOf(e.target);
         dotBtns.forEach((d,x)=>d.classList.toggle('on',x===i));
       }
     });
-  },{threshold:.55});
+  },{threshold:[0,.1,.2,.3,.4,.5,.55,.7,.9]});
   slides.forEach(s=>io.observe(s));
   deck.addEventListener('scroll',()=>{
     const p=deck.scrollTop/(deck.scrollHeight-deck.clientHeight);
