@@ -20,7 +20,7 @@ def col(tag, handle, img, alt, points, cls):
 old = col("לפני", "astral_eilat_careers", "media/9ca888fa6c.jpg", "הפיד הקודם באינסטגרם",
           ["תמונות סטוק ותוכן כללי", "ימים בינלאומיים וברכות יום הולדת", "כמעט בלי עובדים אמיתיים"], "feed-old")
 new = col("היום", "work_at_astral", "media/266e9ea726.jpg", "הפיד הנוכחי באינסטגרם",
-          ["עובדים אמיתיים בכל פוסט", "סיפורי קידום והכוכבים של אסטרל", "רילס ותוכן מהשטח"], "feed-new")
+          ["עובדים אמיתיים כמעט בכל פוסט", "סיפורי קידום והכוכבים של אסטרל", "רילס ותוכן מהשטח"], "feed-new")
 
 slide = f'''<section class="slide sand hrx" id="hr-feeds" data-dot="יישור קו · הפיד">{HRLOGO}{SIG}<div class="wrap">
 <div class="kick reveal">יישור קו · האינסטגרם</div>
