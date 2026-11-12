@@ -1,4 +1,4 @@
-"""Facebook/Instagram inquiries vs hires, May-Sep 2025 vs 2026, inserted after hr-results.
+"""Facebook/Instagram inquiries vs hires, Jan-Oct 2025 vs 2026, inserted after hr-results.
 Usage: python3 -I tools/hr_add_funnel.py "<deck html>"
 Data: Astral HR report "דוחות שיווק לשנת 2026", sheets ריכוז פניות / ריכוז פניות 2025 / ניתוח מקורות,
 row "פייסבוק/אינסטגרם" only (per client instruction).
@@ -7,36 +7,48 @@ import re, sys
 
 path = sys.argv[1]
 s = open(path, encoding="utf-8").read()
-if 'id="hr-funnel"' in s:
-    sys.exit("already applied")
+if 'id="hr-funnel"' in s:  # rebuild: drop the old slide and its CSS
+    s = re.sub(r'<section\b[^>]*id="hr-funnel".*?</section>\s*', '', s, flags=re.S)
+    s = re.sub(r'<style>\s*/\* ===== HR · funnel.*?</style>\s*', '', s, flags=re.S)
 
 SIG = '<img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום">'
 HRLOGO = '<img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg">'
 
 # month, inquiries 2025, inquiries 2026, hired 2025, hired 2026
 MONTHS = [
+    ("ינואר", 52, 512, 1, 4),
+    ("פברואר", 79, 289, 2, 6),
+    ("מרץ", 82, None, 0, None),
+    ("אפריל", 24, 366, 0, 8),
     ("מאי", 71, 449, 2, 6),
     ("יוני", 126, 334, 6, 2),
     ("יולי", 223, 328, 20, 5),
     ("אוגוסט", 136, 362, 1, 3),
     ("ספטמבר", 62, 176, 5, 2),
+    ("אוקטובר", 104, 159, 5, 0),
 ]
-t = [sum(m[i] for m in MONTHS) for i in range(1, 5)]
+t = [sum(m[i] or 0 for m in MONTHS) for i in range(1, 5)]
+f = lambda v: "<span class=\"fn-na\">לא דווח</span>" if v is None else f"{v:,}"
 rows = "".join(
-    f'<tr><th>{n}</th><td class="y25">{a:,}</td><td class="y26">{b:,}</td><td class="y25">{c}</td><td class="y26">{d}</td></tr>'
+    f'<tr><th>{n}</th><td class="y25">{f(a)}</td><td class="y26">{f(b)}</td><td class="y25">{f(c)}</td><td class="y26">{f(d)}</td></tr>'
     for n, a, b, c, d in MONTHS)
 rows += (f'<tr class="hl"><th>סה״כ</th><td class="y25">{t[0]:,}</td><td class="y26">{t[1]:,}</td>'
          f'<td class="y25">{t[2]}</td><td class="y26">{t[3]}</td></tr>')
 
 slide = f'''<section class="slide sand hrx" id="hr-funnel" data-dot="מהפנייה לקליטה">{HRLOGO}{SIG}<div class="wrap">
-<div class="kick reveal">מהפנייה לקליטה · פייסבוק ואינסטגרם · מאי–ספטמבר</div>
-<h2 class="reveal d1">פי 2.7 יותר פניות מהסושיאל. האתגר הבא: להפוך אותן לעובדים</h2>
+<div class="kick reveal">מהפנייה לקליטה · פייסבוק ואינסטגרם · ינואר–אוקטובר, 2025 מול 2026</div>
+<h2 class="reveal d1">פי 3 יותר פניות מהסושיאל. האתגר הבא: להפוך אותן לעובדים</h2>
 <div class="fn-grid">
 <table class="org-t fn-t reveal d2">
-<thead><tr><th></th><th>פניות 2025</th><th>פניות 2026</th><th>התקבלו 2025</th><th>התקבלו 2026</th></tr></thead>
+<thead><tr><th></th><th>פניות 2025</th><th>פניות 2026</th><th>גויסו 2025</th><th>גויסו 2026</th></tr></thead>
 <tbody>{rows}</tbody>
 </table>
 <div class="fn-side">
+<div class="fn-yoy reveal d2"><b>ינואר–אוקטובר · 2025 מול 2026</b>
+<div class="fn-yrow"><span>פניות</span><em><bdi>{t[0]:,}</bdi> ← <strong><bdi>{t[1]:,}</bdi></strong></em><i>פי {t[1]/t[0]:.1f}</i></div>
+<div class="fn-yrow"><span>גיוסים</span><em><bdi>{t[2]}</bdi> ← <strong><bdi>{t[3]}</bdi></strong></em><i class="dn">&#x200e;{(t[3]-t[2])/t[2]:+.0%}</i></div>
+<div class="fn-yrow"><span>אחוז גיוס</span><em><bdi>{t[2]/t[0]:.1%}</bdi> ← <strong><bdi>{t[3]/t[1]:.1%}</bdi></strong></em></div>
+</div>
 <div class="fn-box reveal d3"><b>למה רוב הפניות לא מגיעות לקליטה</b>
 <ol><li><span>מרחק</span>המועמד לא גר באילת ולא מוכן לעבור. זו סיבת הפסילה הנפוצה ביותר.</li>
 <li><span>הסרת מועמדות</span>המועמד פנה, ובהמשך התהליך ירד מזה.</li>
@@ -47,18 +59,28 @@ slide = f'''<section class="slide sand hrx" id="hr-funnel" data-dot="מהפני�
 <li>מעקב משותף עם HR על זמן החזרה למועמד</li></ul></div>
 </div>
 </div>
-<p class="org-src reveal d5">מקור: דוח הגיוס של אסטרל, שורת ״פייסבוק/אינסטגרם״ בלבד. אחוז קליטה: <bdi>{t[2]/t[0]:.1%}</bdi> ב־2025, <bdi>{t[3]/t[1]:.1%}</bdi> ב־2026. סיבות הפסילה: גיליון ניתוח המקורות, 2026.</p>
+<p class="org-src reveal d5">מקור: דוח הגיוס של אסטרל, שורת ״פייסבוק/אינסטגרם״ בלבד. ינואר–אפריל 2025 כולל גם פניות מאתר החברה. במרץ 2026 לא דווחו נתונים. אחוז גיוס: <bdi>{t[2]/t[0]:.1%}</bdi> ב־2025, <bdi>{t[3]/t[1]:.1%}</bdi> ב־2026. סיבות הפסילה: גיליון ניתוח המקורות, 2026.</p>
 </div></section>'''
 
 CSS = '''<style>
 /* ===== HR · funnel (FB/IG inquiries vs hires) ===== */
-#hr-funnel{padding-top:96px;padding-bottom:36px}
+#hr-funnel{padding-top:88px;padding-bottom:30px}
+.hrx .fn-na{font-size:12px;font-weight:400;color:#9aa8b5}
 #hr-funnel h2{font-size:clamp(26px,2.8vw,40px);max-width:980px}
 .hrx .fn-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;margin-top:22px;align-items:start}
 .hrx .fn-t{margin-top:0}
 .hrx .fn-t thead th{padding:11px 12px}
-.hrx .fn-t tbody th,.hrx .fn-t td{padding:10px 12px}
-.hrx .fn-side{display:flex;flex-direction:column;gap:14px}
+.hrx .fn-t tbody th,.hrx .fn-t td{padding:6px 12px}
+.hrx .fn-t .y26{font-size:15px}.hrx .fn-t .y25{font-size:14px}
+.hrx .fn-side{display:flex;flex-direction:column;gap:12px}
+.hrx .fn-yoy{background:#0b1622;color:#fff;border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.hrx .fn-yoy b{font-size:13px;color:#C9A86A;font-weight:700}
+.hrx .fn-yrow{display:grid;grid-template-columns:90px 1fr auto;align-items:baseline;gap:10px}
+.hrx .fn-yrow span{font-size:14px;color:#c9d3dc}
+.hrx .fn-yrow em{font-style:normal;font-size:16px;color:#c9d3dc}
+.hrx .fn-yrow strong{font-size:22px;color:#fff}
+.hrx .fn-yrow i{font-style:normal;font-size:13px;font-weight:700;color:#0b1622;background:#C9A86A;border-radius:100px;padding:2px 10px}
+.hrx .fn-yrow i.dn{background:#e7d9d6;color:#7a3b32}
 .hrx .fn-box{background:#fff;border:1px solid #e6dfcf;border-top:3px solid #C9A86A;border-radius:14px;padding:16px 18px}
 .hrx .fn-box b{display:block;font-size:16px;color:#0b1622;margin-bottom:8px}
 .hrx .fn-box ol,.hrx .fn-box ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px}
