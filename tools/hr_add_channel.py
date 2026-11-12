@@ -1,7 +1,7 @@
-"""WhatsApp (May-Sep 2025) vs Adam system (May-Sep 2026) campaign destination, inserted after hr-funnel.
+"""WhatsApp (Dec 2025-Apr 2026) vs Adam system (May-Sep 2026) campaign destination, inserted after hr-funnel.
 Usage: python3 -I tools/hr_add_channel.py "<deck html>"   (rebuilds the slide if it already exists)
 Data: Astral HR report, row "פייסבוק/אינסטגרם". Per client: May-Sep 2026 campaigns led to the Adam system,
-the same months in 2025 led to WhatsApp.
+the five months before (Dec 2025-Apr 2026) led to WhatsApp. March 2026 was not reported.
 """
 import re, sys
 
@@ -14,10 +14,14 @@ if 'id="hr-channel"' in s:
 SIG = '<img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום">'
 HRLOGO = '<img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg">'
 
-# May-Sep totals, row "פייסבוק/אינסטגרם"
-WA_INQ, WA_HIRED = 618, 34      # 2025, campaigns to WhatsApp
-AD_INQ, AD_HIRED = 1649, 18     # 2026, campaigns to the Adam system
+# (month, inquiries, hired), row "פייסבוק/אינסטגרם"
+WA = [("דצמבר 2025", 521, 6), ("ינואר", 512, 4), ("פברואר", 289, 6), ("אפריל", 366, 8)]   # March 2026 not reported
+AD = [("מאי", 449, 6), ("יוני", 334, 2), ("יולי", 328, 5), ("אוגוסט", 362, 3), ("ספטמבר", 176, 2)]
+WA_INQ, WA_HIRED = sum(m[1] for m in WA), sum(m[2] for m in WA)
+AD_INQ, AD_HIRED = sum(m[1] for m in AD), sum(m[2] for m in AD)
 
+mon_wa = WA_HIRED / len(WA)     # hires per reported month
+mon_ad = AD_HIRED / len(AD)
 per_wa = WA_INQ / WA_HIRED      # inquiries needed per hire
 per_ad = AD_INQ / AD_HIRED
 rate_wa = WA_HIRED / WA_INQ
@@ -31,21 +35,21 @@ def row(label, wa, ad, wa_w, ad_w, badge, note):
             f'</div><p>{note}</p></div>')
 
 rows = (
-    row("עובדים שגויסו", WA_HIRED, AD_HIRED, 100, AD_HIRED / WA_HIRED * 100,
-        "כמעט פי 2", f"יותר עובדים, משליש מהפניות ({WA_INQ:,} מול {AD_INQ:,})")
+    row("עובדים שגויסו בממוצע בחודש", f"{mon_wa:.1f}", f"{mon_ad:.1f}", 100, mon_ad / mon_wa * 100,
+        f"&#x200e;+{mon_wa / mon_ad - 1:.0%}", f"{WA_HIRED} עובדים ב־{len(WA)} חודשים, מול {AD_HIRED} ב־{len(AD)} חודשים")
     + row("מכל 100 פונים, כמה גויסו", f"{rate_wa * 100:.1f}", f"{rate_ad * 100:.1f}", 100, rate_ad / rate_wa * 100,
-          f"פי {rate_wa / rate_ad:.0f}", "פונה מוואטסאפ הוא מועמד רציני יותר")
+          f"&#x200e;+{rate_wa / rate_ad - 1:.0%}", "פונה מוואטסאפ הוא מועמד רציני יותר")
     + row("כמה פניות צריך לכל עובד אחד", f"{per_wa:.0f}", f"{per_ad:.0f}", per_wa / per_ad * 100, 100,
-          f"פי {per_ad / per_wa:.0f} פחות", "פחות זמן של רכזות הגיוס על פניות שלא מתקדמות")
+          f"{round(per_ad) - round(per_wa)} פניות פחות", "פחות זמן של רכזות הגיוס על פניות שלא מתקדמות")
 )
 
 slide = f'''<section class="slide sand hrx" id="hr-channel" data-dot="וואטסאפ מול מערכת אדם">{HRLOGO}{SIG}<div class="wrap">
-<div class="kick reveal">לאן הקמפיין מוביל · פייסבוק ואינסטגרם · מאי–ספטמבר</div>
-<h2 class="reveal d1">וואטסאפ מביא עובדים. טופס מביא פניות.</h2>
-<p class="cw-lead reveal d1">אותם חודשים, אותו ערוץ פרסום. ב־2025 הקמפיינים הובילו לשיחה בוואטסאפ, וב־2026 לטופס במערכת אדם.</p>
+<div class="kick reveal">לאן הקמפיין מוביל · פייסבוק ואינסטגרם</div>
+<h2 class="reveal d1">וואטסאפ מביא יותר עובדים מאותה כמות פניות</h2>
+<p class="cw-lead reveal d1">חמשת החודשים שבהם הקמפיינים הובילו לוואטסאפ (דצמבר 2025–אפריל 2026), מול חמשת החודשים שאחריהם, שבהם הובילו לטופס במערכת אדם (מאי–ספטמבר 2026). <bdi>{WA_INQ:,}</bdi> פניות מול <bdi>{AD_INQ:,}</bdi>.</p>
 <div class="cw-grid">{rows}</div>
 <p class="ch-note reveal d5">למה זה עובד: בוואטסאפ המועמד כותב, שואל ומקבל תשובה מאדם. זו כבר תחילת ראיון, ואפשר לסנן בה מרחק, זמינות וניסיון. טופס ממלאים בלחיצה, בלי מחויבות.</p>
-<p class="org-src reveal d5">מקור: דוח הגיוס של אסטרל, שורת ״פייסבוק/אינסטגרם״, מאי–ספטמבר 2025 (וואטסאפ) מול מאי–ספטמבר 2026 (מערכת אדם). ההשוואה בין שנים שונות, ולכן גם שוק העבודה והמשרות הפתוחות יכולים להשפיע.</p>
+<p class="org-src reveal d5">מקור: דוח הגיוס של אסטרל, שורת ״פייסבוק/אינסטגרם״. במרץ 2026 לא דווחו נתונים, ולכן תקופת הוואטסאפ כוללת 4 חודשים מדווחים.</p>
 </div></section>'''
 
 CSS = '''<style>
@@ -87,4 +91,4 @@ for i, m in enumerate(secs, 1):
 s = "".join(out) + s[last:]
 s = s.replace("</head>", CSS + "\n</head>", 1)
 open(path, "w", encoding="utf-8").write(s)
-print("slides:", total, f"per hire {per_wa:.1f} vs {per_ad:.1f}; rate {rate_wa:.3f} vs {rate_ad:.3f}")
+print("slides:", total, WA_INQ, WA_HIRED, AD_INQ, AD_HIRED, f"mon {mon_wa:.1f}/{mon_ad:.1f} rate {rate_wa:.4f}/{rate_ad:.4f} per {per_wa:.0f}/{per_ad:.0f}")
