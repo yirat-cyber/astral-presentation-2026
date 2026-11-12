@@ -620,31 +620,28 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
 @media(max-width:560px){.hrx .cm-row{grid-template-columns:1fr}}
 </style>
 <style>
-/* ===== HR · funnel (FB/IG inquiries vs hires) ===== */
+/* ===== HR · funnel (FB/IG inquiries, year over year) ===== */
 #hr-funnel{padding-top:88px;padding-bottom:30px}
-.hrx .fn-na{font-size:12px;font-weight:400;color:#9aa8b5}
-#hr-funnel h2{font-size:clamp(26px,2.8vw,40px);max-width:980px}
-.hrx .fn-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;margin-top:22px;align-items:start}
+#hr-funnel h2{font-size:clamp(28px,3vw,44px)}
+.hrx .fn-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;margin-top:22px;align-items:stretch}
 .hrx .fn-t{margin-top:0}
-.hrx .fn-t thead th{padding:11px 12px}
+.hrx .fn-t thead th{padding:10px 12px}
 .hrx .fn-t tbody th,.hrx .fn-t td{padding:6px 12px}
 .hrx .fn-t .y26{font-size:15px}.hrx .fn-t .y25{font-size:14px}
-.hrx .fn-side{display:flex;flex-direction:column;gap:12px}
-.hrx .fn-yoy{background:#0b1622;color:#fff;border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.hrx .fn-na{font-size:12px;font-weight:400;color:#9aa8b5}
+.hrx .fn-t td.fn-bars{width:42%;text-align:right}
+.hrx .fn-bar{height:7px;border-radius:4px;margin:2px 0}
+.hrx .fn-bar.b25,.hrx .fn-legend i.b25{background:#cfd7de}
+.hrx .fn-bar.b26,.hrx .fn-legend i.b26{background:#C9A86A}
+.hrx .fn-legend{font-weight:400}
+.hrx .fn-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 10px 0 4px;vertical-align:middle}
+.hrx .fn-yoy{background:#0b1622;color:#fff;border-radius:16px;padding:26px 28px;display:flex;flex-direction:column;justify-content:center;gap:8px}
 .hrx .fn-yoy b{font-size:13px;color:#C9A86A;font-weight:700}
-.hrx .fn-yrow{display:grid;grid-template-columns:90px 1fr auto;align-items:baseline;gap:10px}
-.hrx .fn-yrow span{font-size:14px;color:#c9d3dc}
-.hrx .fn-yrow em{font-style:normal;font-size:16px;color:#c9d3dc}
-.hrx .fn-yrow strong{font-size:22px;color:#fff}
-.hrx .fn-yrow i{font-style:normal;font-size:13px;font-weight:700;color:#0b1622;background:#C9A86A;border-radius:100px;padding:2px 10px}
-.hrx .fn-yrow i.dn{background:#e7d9d6;color:#7a3b32}
-.hrx .fn-box{background:#fff;border:1px solid #e6dfcf;border-top:3px solid #C9A86A;border-radius:14px;padding:16px 18px}
-.hrx .fn-box b{display:block;font-size:16px;color:#0b1622;margin-bottom:8px}
-.hrx .fn-box ol,.hrx .fn-box ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px}
-.hrx .fn-box li{font-size:14px;color:#4a5965;line-height:1.5}
-.hrx .fn-box li span{font-weight:700;color:#0b1622;margin-inline-end:6px}
-.hrx .fn-next{background:linear-gradient(150deg,rgba(201,168,106,.20),rgba(201,168,106,.05));border-color:rgba(166,134,79,.45)}
-@media(max-width:900px){.hrx .fn-grid{grid-template-columns:1fr}}
+.hrx .fn-big{font-size:clamp(64px,7vw,110px);font-weight:800;line-height:1;color:#C9A86A}
+.hrx .fn-lbl{font-size:20px;font-weight:700}
+.hrx .fn-was{font-size:16px;color:#c9d3dc}
+.hrx .fn-yoy .chg{align-self:flex-start;margin-top:6px}
+@media(max-width:900px){.hrx .fn-grid{grid-template-columns:1fr}.hrx .fn-t td.fn-bars,.hrx .fn-legend{display:none}}
 </style>
 </head>
 <body>
@@ -757,31 +754,22 @@ h1,h2,h3,h4,.num{font-weight:700!important}body,body *{font-family:"Open Sans",A
 <p class="org-src reveal d5">מקור: Meta Ads Manager · חשבון Astral - HR · ינואר–אוקטובר. שיחה היא פנייה של מועמד, לא בהכרח מועמד ייחודי.</p>
 </div><span class="slide-page-number" aria-label="שקף 13 מתוך 20">13 / 20</span></section>
 
-<section class="slide sand hrx" id="hr-funnel" data-dot="מהפנייה לקליטה"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
-<div class="kick reveal">מהפנייה לקליטה · פייסבוק ואינסטגרם · ינואר–אוקטובר, 2025 מול 2026</div>
-<h2 class="reveal d1">פי 3 יותר פניות מהסושיאל. האתגר הבא: להפוך אותן לעובדים</h2>
+<section class="slide sand hrx" id="hr-funnel" data-dot="פניות מהסושיאל"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
+<div class="kick reveal">פניות של מועמדים · פייסבוק ואינסטגרם · ינואר–אוקטובר</div>
+<h2 class="reveal d1">פי 3 יותר מועמדים פנו אלינו דרך הסושיאל</h2>
 <div class="fn-grid">
 <table class="org-t fn-t reveal d2">
-<thead><tr><th></th><th>פניות 2025</th><th>פניות 2026</th><th>גויסו 2025</th><th>גויסו 2026</th></tr></thead>
-<tbody><tr><th>ינואר</th><td class="y25">52</td><td class="y26">512</td><td class="y25">1</td><td class="y26">4</td></tr><tr><th>פברואר</th><td class="y25">79</td><td class="y26">289</td><td class="y25">2</td><td class="y26">6</td></tr><tr><th>מרץ</th><td class="y25">82</td><td class="y26"><span class="fn-na">לא דווח</span></td><td class="y25">0</td><td class="y26"><span class="fn-na">לא דווח</span></td></tr><tr><th>אפריל</th><td class="y25">24</td><td class="y26">366</td><td class="y25">0</td><td class="y26">8</td></tr><tr><th>מאי</th><td class="y25">71</td><td class="y26">449</td><td class="y25">2</td><td class="y26">6</td></tr><tr><th>יוני</th><td class="y25">126</td><td class="y26">334</td><td class="y25">6</td><td class="y26">2</td></tr><tr><th>יולי</th><td class="y25">223</td><td class="y26">328</td><td class="y25">20</td><td class="y26">5</td></tr><tr><th>אוגוסט</th><td class="y25">136</td><td class="y26">362</td><td class="y25">1</td><td class="y26">3</td></tr><tr><th>ספטמבר</th><td class="y25">62</td><td class="y26">176</td><td class="y25">5</td><td class="y26">2</td></tr><tr><th>אוקטובר</th><td class="y25">104</td><td class="y26">159</td><td class="y25">5</td><td class="y26">0</td></tr><tr class="hl"><th>סה״כ</th><td class="y25">959</td><td class="y26">2,975</td><td class="y25">42</td><td class="y26">36</td></tr></tbody>
+<thead><tr><th></th><th>2025</th><th>2026</th><th class="fn-legend"><i class="b25"></i>2025 <i class="b26"></i>2026</th></tr></thead>
+<tbody><tr><th>ינואר</th><td class="y25">52</td><td class="y26">512</td><td class="fn-bars"><div class="fn-bar b25" style="width:10.2%"></div><div class="fn-bar b26" style="width:100.0%"></div></td></tr><tr><th>פברואר</th><td class="y25">79</td><td class="y26">289</td><td class="fn-bars"><div class="fn-bar b25" style="width:15.4%"></div><div class="fn-bar b26" style="width:56.4%"></div></td></tr><tr><th>מרץ</th><td class="y25">82</td><td class="y26"><span class="fn-na">לא דווח</span></td><td class="fn-bars"><div class="fn-bar b25" style="width:16.0%"></div><div class="fn-bar b26" style="width:0.0%"></div></td></tr><tr><th>אפריל</th><td class="y25">24</td><td class="y26">366</td><td class="fn-bars"><div class="fn-bar b25" style="width:4.7%"></div><div class="fn-bar b26" style="width:71.5%"></div></td></tr><tr><th>מאי</th><td class="y25">71</td><td class="y26">449</td><td class="fn-bars"><div class="fn-bar b25" style="width:13.9%"></div><div class="fn-bar b26" style="width:87.7%"></div></td></tr><tr><th>יוני</th><td class="y25">126</td><td class="y26">334</td><td class="fn-bars"><div class="fn-bar b25" style="width:24.6%"></div><div class="fn-bar b26" style="width:65.2%"></div></td></tr><tr><th>יולי</th><td class="y25">223</td><td class="y26">328</td><td class="fn-bars"><div class="fn-bar b25" style="width:43.6%"></div><div class="fn-bar b26" style="width:64.1%"></div></td></tr><tr><th>אוגוסט</th><td class="y25">136</td><td class="y26">362</td><td class="fn-bars"><div class="fn-bar b25" style="width:26.6%"></div><div class="fn-bar b26" style="width:70.7%"></div></td></tr><tr><th>ספטמבר</th><td class="y25">62</td><td class="y26">176</td><td class="fn-bars"><div class="fn-bar b25" style="width:12.1%"></div><div class="fn-bar b26" style="width:34.4%"></div></td></tr><tr><th>אוקטובר</th><td class="y25">104</td><td class="y26">159</td><td class="fn-bars"><div class="fn-bar b25" style="width:20.3%"></div><div class="fn-bar b26" style="width:31.1%"></div></td></tr><tr class="hl"><th>סה״כ</th><td class="y25">959</td><td class="y26">2,975</td><td><span class="chg">פי 3.1</span></td></tr></tbody>
 </table>
-<div class="fn-side">
-<div class="fn-yoy reveal d2"><b>ינואר–אוקטובר · 2025 מול 2026</b>
-<div class="fn-yrow"><span>פניות</span><em><bdi>959</bdi> ← <strong><bdi>2,975</bdi></strong></em><i>פי 3.1</i></div>
-<div class="fn-yrow"><span>גיוסים</span><em><bdi>42</bdi> ← <strong><bdi>36</bdi></strong></em><i class="dn">&#x200e;-14%</i></div>
-<div class="fn-yrow"><span>אחוז גיוס</span><em><bdi>4.4%</bdi> ← <strong><bdi>1.2%</bdi></strong></em></div>
-</div>
-<div class="fn-box reveal d3"><b>למה רוב הפניות לא מגיעות לקליטה</b>
-<ol><li><span>מרחק</span>המועמד לא גר באילת ולא מוכן לעבור. זו סיבת הפסילה הנפוצה ביותר.</li>
-<li><span>הסרת מועמדות</span>המועמד פנה, ובהמשך התהליך ירד מזה.</li>
-<li><span>קורות חיים</span>הניסיון לא מתאים למשרה.</li></ol></div>
-<div class="fn-box fn-next reveal d4"><b>מה עושים ב־2027</b>
-<ul><li>סינון כבר במודעה: עבודה באילת, מגורים מסובסדים, משמרות</li>
-<li>שאלות סינון אוטומטיות בוואטסאפ, לפני שהפנייה מגיעה לרכזת</li>
-<li>מעקב משותף עם HR על זמן החזרה למועמד</li></ul></div>
+<div class="fn-yoy reveal d3"><b>ינואר–אוקטובר · 2025 מול 2026</b>
+<div class="fn-big"><bdi>2,975</bdi></div>
+<div class="fn-lbl">פניות של מועמדים ב־2026</div>
+<div class="fn-was">לעומת <bdi>959</bdi> ב־2025</div>
+<span class="chg">פי 3.1</span>
 </div>
 </div>
-<p class="org-src reveal d5">מקור: דוח הגיוס של אסטרל, שורת ״פייסבוק/אינסטגרם״ בלבד. ינואר–אפריל 2025 כולל גם פניות מאתר החברה. במרץ 2026 לא דווחו נתונים. אחוז גיוס: <bdi>4.4%</bdi> ב־2025, <bdi>1.2%</bdi> ב־2026. סיבות הפסילה: גיליון ניתוח המקורות, 2026.</p>
+<p class="org-src reveal d4">מקור: דוח הגיוס של אסטרל, שורת ״פייסבוק/אינסטגרם״ בלבד. ינואר–אפריל 2025 כולל גם פניות מאתר החברה. במרץ 2026 לא דווחו נתונים.</p>
 </div><span class="slide-page-number" aria-label="שקף 14 מתוך 20">14 / 20</span></section>
 
 <section class="slide sand hrx" id="hr-signs" data-dot="גאוות יחידה · התגובות"><img class="brand hr-brand" alt="Work at Astral Hotels" src="media/411ad1fcab.svg"><img class="agency-signature" src="media/8974e87165.svg" alt="לוגו משרד הפרסום"><div class="wrap">
